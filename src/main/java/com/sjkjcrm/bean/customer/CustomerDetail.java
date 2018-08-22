@@ -16,7 +16,7 @@ import java.util.Date;
 public class CustomerDetail {
 
     /**
-     * 主键
+     * 主键去去去
      */
     @Excel(name = "ID")
     private String customerId;
