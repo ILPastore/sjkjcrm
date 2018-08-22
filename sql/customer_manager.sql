@@ -1,3 +1,5 @@
+create database sjkj;
+
 #客户信息详情表
 create table customer_detail(
     customer_id varchar(50) not null comment '客户详情ID',

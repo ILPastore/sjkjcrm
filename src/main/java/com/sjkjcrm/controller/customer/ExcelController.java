@@ -1,7 +1,9 @@
 package com.sjkjcrm.controller.customer;
 
 import com.sjkjcrm.bean.customer.CustomerDetail;
+import com.sjkjcrm.service.customer.CustomerDetailService;
 import com.sjkjcrm.util.excel.ExcelUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description excel测试
+ * @Description excel导入导出
  * @Author Zhang Qiao
  * @Date 2018-08-22 10:25
  **/
@@ -19,28 +21,20 @@ import java.util.List;
 @RequestMapping("/customer")
 public class ExcelController {
 
+    @Autowired
+    private CustomerDetailService customerDetailService;
+
     @RequestMapping("/export")
     public void export(HttpServletResponse response) {
 
-        // 模拟从数据库获取需要导出的数据
-        List<CustomerDetail> customerDetailList = new ArrayList<>();
-        CustomerDetail customerDetail = new CustomerDetail();
-        customerDetail.setCustomerId("1");
-        customerDetail.setName("张三");
-        customerDetail.setNumber("101");
-        customerDetail.setType("01");
-        customerDetail.setPhone("13026369859");
-        customerDetail.setCorpTel("89021600");
-        customerDetail.setMail("jack@123.com");
-        customerDetail.setAddress("武汉市楚河汉界");
-        customerDetail.setCorpType("1");
-        customerDetail.setCorpGrade("01");
-        customerDetail.setVisitDate(new Date());
-        customerDetailList.add(customerDetail);
+        List<CustomerDetail> customerDetailList = customerDetailService.getAll();
+        if (customerDetailList.isEmpty()) {
+            return;
+        }
 
         // 导出操作
         try {
-            ExcelUtils.exportExcel(customerDetailList, "客户列表", "啊呀", CustomerDetail.class, "客户信息.xls", response);
+            ExcelUtils.exportExcel(customerDetailList, "客户列表", "客户信息", CustomerDetail.class, "客户信息.xls", response);
         } catch (Exception e) {
             e.printStackTrace();
         }
