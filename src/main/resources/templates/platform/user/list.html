@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Title</title>
+    <title>客户管理</title>
     <div th:replace="common/links::header"></div>
     <div th:replace="common/script::js_footer"></div>
 </head>
@@ -34,10 +34,9 @@
                 <div class="layui-input-inline">
                     <select name="type" lay-verify="required" lay-search="">
                         <option value="">请选择</option>
-                        <option value="1">华南理工大学大学城</option>
-                        <option value="2">华南理工大学五山校区</option>
-                        <option value="3">中山大学珠海校区</option>
-                        <option value="4">中山大学大学城校区</option>
+                        <option value="0">意向客户</option>
+                        <option value="1">签单客户</option>
+                        <option value="2">公海客户</option>
                     </select>
                 </div>
             </div>
@@ -84,11 +83,15 @@
     layui.use('table', function () {
         var cols = [[
             {field: 'checkBox', checkbox: true, fixed: true}
-            , {field: 'username', title: '用户名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-            , {field: 'mobile', title: '手机号', sort: true}
-            , {field: 'nickname', title: '昵称'}
-            , {field: 'lastLoginTime', title: '最后登录时间'}
-            , {field: 'ip', title: '最后登录ip', align: 'center'} //单元格内容水平居中
+            , {field: 'name', title: '客户名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            , {field: 'number', title: '客户编号', sort: true}
+            , {field: 'phone', title: '联系电话'}
+            , {field: 'corpTel', title: '公司电话'}
+            , {field: 'mail', title: '邮箱'}
+            , {field: 'address', title: '通讯地址'}
+            , {field: 'type', title: '客户类型'}
+            , {field: 'corpGrade', title: '客户级别'}
+            , {field: 'visitDate', title: '回访日期'}
             , {field: 'op', title: '操作', align: 'center', toolbar: '#toolBars'} //这里的toolbar值是模板元素的选择器
         ]];
         var table = layui.table, $ = layui.jquery;
