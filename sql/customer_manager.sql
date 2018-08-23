@@ -13,5 +13,6 @@ create table customer_detail(
     corp_type varchar(30) comment '公司类型',
     corp_grade varchar(30) comment '公司级别',
     visit_date datetime comment '回访日期',
+    linkman varchar(10) comment '联系人',
     primary key (customer_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户信息详情表';

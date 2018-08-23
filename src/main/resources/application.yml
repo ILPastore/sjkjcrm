@@ -15,3 +15,9 @@ spring:
     encoding:
       charset: utf-8
       enabled: true
+  thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
+      encoding: UTF-8
+      mode: HTML5

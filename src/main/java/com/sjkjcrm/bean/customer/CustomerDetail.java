@@ -80,4 +80,10 @@ public class CustomerDetail {
      */
     @Excel(name = "回访日期", exportFormat = "yyyy-MM-dd", orderNum = "10")
     private Date visitDate;
+
+    /**
+     * 联系人
+     */
+    @Excel(name= "联系人", orderNum = "11")
+    private String linkman;
 }
