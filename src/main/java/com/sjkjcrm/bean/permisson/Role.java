@@ -7,24 +7,33 @@ import java.util.List;
  * @author: xianyunpeng
  */
 @Entity
+@Table(name="base_role")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    /**
+     * 角色编码
+     */
+    private String roleCode;
+
+    /**
+     * 角色名称
+     */
     private String roleName;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
-    private List<Permission> permissions;
 
-    public Long getId() {
-        return id;
-    }
+    /**
+     * 描述
+     */
+    private String description;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    /**
+     * 是否可用
+     */
+    private int available;
+
 
     public String getRoleName() {
         return roleName;
@@ -34,19 +43,37 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public User getUser() {
-        return user;
+
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public List<Permission> getPermissions() {
-        return permissions;
+    public int getAvailable() {
+        return available;
     }
 
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

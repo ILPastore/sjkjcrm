@@ -9,12 +9,13 @@ import com.sjkjcrm.bean.permisson.User;
 
 
 public interface UserRepository extends BaseRepository<User,Long>{
+
     /**
      * 按名称查询
-     * @param name
+     * @param userName
      * @return
      */
-    User findByName(String name);
+    User findByUserName(String userName);
 }
 
 

@@ -1,28 +1,23 @@
 package com.sjkjcrm.bean.permisson;
 
-
 import javax.persistence.*;
 
-
-/**
- * @author: xianyunpeng
- */
 @Entity
-@Table(name="base_permission")
-public class Permission {
-
+@Table(name="base_role_permission")
+public class RolePermission {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long  id;
 
     /**
+     * 角色编码
+     */
+    private String roleCode;
+
+    /**
      * 权限编码
      */
     private String permissionCode;
-    /**
-     * 权限标志符
-     */
-    private String permission;
 
     public Long getId() {
         return id;
@@ -32,12 +27,12 @@ public class Permission {
         this.id = id;
     }
 
-    public String getPermission() {
-        return permission;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 
     public String getPermissionCode() {

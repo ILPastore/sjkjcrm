@@ -7,16 +7,27 @@ import java.util.List;
  * @author: xianyunpeng
  */
 @Entity
+@Table(name="base_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true)
-    private String name;
-    private Integer password;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    private List<Role> roles;
+    private String userCode;
+    @Column(unique = true)
+    private String userName;
+    private String password;
+
+    /**
+     * 盐
+     */
+    private String salt;
+
+    /**
+     * 是否锁定
+     */
+    private int locked;
 
     public Long getId() {
         return id;
@@ -26,27 +37,44 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public int getLocked() {
+        return locked;
+    }
+
+    public void setLocked(int locked) {
+        this.locked = locked;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
