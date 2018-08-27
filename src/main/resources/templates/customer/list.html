@@ -92,6 +92,7 @@
             , {field: 'type', title: '客户类型'}
             , {field: 'corpGrade', title: '客户级别'}
             , {field: 'visitDate', title: '回访日期'}
+            , {field: 'linkman', title: '联系人'}
             , {field: 'op', title: '操作', align: 'center', toolbar: '#toolBars'} //这里的toolbar值是模板元素的选择器
         ]];
         var table = layui.table, $ = layui.jquery;
@@ -119,11 +120,13 @@
         $('#searchBtn').on('click', function () {
             Common.searchTable('searchForm', initTable);
         });
+
         $("#addBtn").on('click', function () {
-            Common.openFrame('/sys/user/to-edit', '添加用户信息', '600px', '500px', function () {
+            Common.openFrame('/customer/addcustomer', '添加客户信息', '600px', '500px', function () {
                 $('#searchBtn').click();
             });
         });
+
         $('#exportBtn').on('click', function () {
             window.location.href = basePath + '/sys/user/export?username=' + $("input[name=username]").val() + '&mobile=' + $("input[name=mobile]").val();
         });

@@ -21,3 +21,5 @@ spring:
       suffix: .html
       encoding: UTF-8
       mode: HTML5
+  mvc:
+    static-path-pattern: /**
