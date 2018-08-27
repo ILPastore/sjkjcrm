@@ -22,7 +22,7 @@ public class ExcelController {
     @Autowired
     private CustomerDetailService customerDetailService;
 
-    @RequestMapping("/export")
+    @RequestMapping("/export1")
     public void export(HttpServletResponse response) {
 
         List<CustomerDetail> customerDetailList = customerDetailService.getAll();
@@ -38,7 +38,7 @@ public class ExcelController {
         }
     }
 
-    @RequestMapping("/importExcel")
+    @RequestMapping("/importExcel2")
     public void importExcel() {
         String filePath = "D:\\客户信息.xls";
         // 解析excel，

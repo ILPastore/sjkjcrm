@@ -61,8 +61,12 @@ public class LoginServiceImpl implements ILoginService {
         return role;
     }
 
-    //查询用户通过用户名
     @Override
+    public User findByName(String name) {
+        return null;
+    }
+
+    //查询用户通过用户名
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
