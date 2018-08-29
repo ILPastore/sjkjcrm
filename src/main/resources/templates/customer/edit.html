@@ -5,7 +5,7 @@
     <title>Title</title>
     <div th:replace="common/links::header"></div>
     <div th:replace="common/script::js_footer"></div>
-    <script th:src="@{/js/common/verify.js}"></script>
+    <!--<script th:src="@{/js/common/verify.js}"></script>-->
 </head>
 <body class="form-body">
 <form class="layui-form ">
@@ -80,17 +80,17 @@
     </div>
 
 
-    <!--<div class="layui-form-item">-->
-    <!--<div class="layui-col-md4 layui-col-md-offset2">-->
-    <!--<label class="layui-form-label">头像</label>-->
-    <!--<div class="layui-input-inline">-->
-    <!--<button type="button" class="layui-btn" id="test1">-->
-    <!--<i class="layui-icon">&#xe67c;</i>上传图片-->
-    <!--</button>-->
-    <!--<input type="hidden" id="photo" name="photo" value="">-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+    <div class="layui-form-item">
+        <div class="layui-col-md4 layui-col-md-offset2">
+            <label class="layui-form-label">头像</label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" id="test1">
+                    <i class="layui-icon">&#xe67c;</i>上传图片
+                </button>
+                <input type="hidden" id="photo" name="photo" value="">
+            </div>
+        </div>
+    </div>
     <div class="layui-form-item layui-col-md-offset5">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit="" lay-filter="add">立即提交</button>
@@ -98,14 +98,17 @@
         </div>
     </div>
 </form>
-<script type="text/javascript" th:inline="javascript">
+<script type="text/javascript" src="/js/layui/layui.all.js"></script>
+<script type="text/javascript" src="/js/common/common.js"></script>
+<script th:inline="javascript">
     layui.use('form', function () {
-        var form = layui.form, upload = layui.upload, $ = layui.jquery;
+        var form = layui.form, $ = layui.jquery;
         form.render();
-        Common.uploadFile('#test1', upload, function (data) {
-            $("#photo").val(data);
-            $("#previewPhoto img").attr("src", defaultImageViewPath + data);
-        }, {category: 'photo'});
+        // Common.uploadFile('#test1', upload, function (data) {
+        //     $("#photo").val(data);
+        //     $("#previewPhoto img").attr("src", defaultImageViewPath + data);
+        // }, {category: 'photo'});
+
         // 监听提交
         form.on('submit(add)', function (data) {
             alert(1);

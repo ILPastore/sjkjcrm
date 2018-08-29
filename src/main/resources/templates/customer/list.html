@@ -122,7 +122,7 @@
         });
 
         $("#addBtn").on('click', function () {
-            Common.openFrame('/customer/addcustomer', '添加客户信息', '600px', '500px', function () {
+            Common.openFrame('/customer/edit.html', '添加客户信息', '600px', '500px', function () {
                 $('#searchBtn').click();
             });
         });
@@ -133,7 +133,7 @@
     });
 
     layui.use('form', function () {
-        var form = layui.form();
+        var form = layui.form;
         form.render();
     });
 </script>
