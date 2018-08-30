@@ -1,7 +1,9 @@
 package com.sjkjcrm.dao;
 
+import com.sjkjcrm.bean.customer.CustomerDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
@@ -54,6 +56,11 @@ public class BaseDao extends JdbcDaoSupport {
             return null;
         }
         return row.get(0);
+    }
+
+    @SuppressWarnings("")
+    public List<Class<?>> queryList(String sql, Object[] args, Class<?> cls) {
+        return getWrapTemplate().query(sql, args, new BeanPropertyRowMapper(cls));
     }
 
     public List<Map<String, Object>> queryForList(String sql) {

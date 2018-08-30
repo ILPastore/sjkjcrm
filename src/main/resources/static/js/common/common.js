@@ -103,7 +103,6 @@ var Common = function () {
     };
 
     var ajaxFormSubmit = function (ajaxUrl, data, successFn, beforeFn,method) {
-        console.log(method);
         layui.use('form', function () {
             var $ = layui.jquery, layer = layui.layer;
             $.ajax({

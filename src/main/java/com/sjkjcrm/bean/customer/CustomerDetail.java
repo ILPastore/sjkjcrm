@@ -82,7 +82,7 @@ public class CustomerDetail {
      * 回访日期
      */
     @Excel(name = "回访日期", exportFormat = "yyyy-MM-dd", orderNum = "10")
-    private Date visitDate;
+    private String visitDate;
 
     /**
      * 联系人

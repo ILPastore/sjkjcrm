@@ -1,5 +1,6 @@
 package com.sjkjcrm.controller.customer;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.sjkjcrm.bean.customer.CustomerDetail;
 import com.sjkjcrm.service.customer.CustomerDetailService;
 import com.sjkjcrm.util.excel.ExcelUtils;
@@ -24,8 +25,8 @@ public class ExcelController {
 
     @RequestMapping("/export1")
     public void export(HttpServletResponse response) {
-
-        List<CustomerDetail> customerDetailList = customerDetailService.getAll();
+        Page<CustomerDetail> page = new Page<>();
+        List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
         if (customerDetailList.isEmpty()) {
             return;
         }

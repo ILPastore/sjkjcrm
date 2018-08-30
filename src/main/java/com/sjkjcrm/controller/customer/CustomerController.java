@@ -6,6 +6,7 @@ import com.sjkjcrm.service.customer.CustomerDetailService;
 import com.sjkjcrm.util.controller.BaseController;
 import com.sjkjcrm.util.excel.ExcelUtils;
 import com.sjkjcrm.util.layui.ResultModel;
+import com.sjkjcrm.util.layui.ResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * 客户管理模块controller
+ */
 @Controller
 @RequestMapping("/customer")
 public class CustomerController extends BaseController {
@@ -28,8 +30,9 @@ public class CustomerController extends BaseController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public ResultModel<List<CustomerDetail>> queryCustomerList(Page<CustomerDetail> page) {
-        List<CustomerDetail> customerDetailList = customerDetailService.getAll();
+    public ResultModel<List<CustomerDetail>> queryCustomerListByCondition(Page<CustomerDetail> page) {
+        System.out.println(page.getCondition());
+        List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
         return new ResultModel<>("0", "", customerDetailList);
     }
 
@@ -66,10 +69,9 @@ public class CustomerController extends BaseController {
      */
     @RequestMapping("/insert")
     @ResponseBody
-    public ResultModel<CustomerDetail> insertCustomer(CustomerDetail customerDetail) {
+    public ResultModel insertCustomer(CustomerDetail customerDetail) {
         customerDetailService.insertCustomer(customerDetail);
-//        return "{\"code\": 0}";
-        return null;
+        return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
     }
 
     /**
@@ -78,8 +80,8 @@ public class CustomerController extends BaseController {
      */
     @RequestMapping("/export")
     public void export(HttpServletResponse response) {
-
-        List<CustomerDetail> customerDetailList = customerDetailService.getAll();
+        Page<CustomerDetail> page = new Page<>();
+        List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
         if (customerDetailList.isEmpty()) {
             return;
         }

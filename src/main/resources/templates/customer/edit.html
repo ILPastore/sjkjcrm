@@ -5,13 +5,15 @@
     <title>Title</title>
     <div th:replace="common/links::header"></div>
     <div th:replace="common/script::js_footer"></div>
+    <script th:src="@{/js/common/verify.js}"></script>
+    <script type="text/javascript" src="/js/layui/lay/modules/laydate.js"></script>
 </head>
 <body class="form-body">
 <form class="layui-form ">
     <div class="layui-form-item layui-col-md6 layui-col-md-offset2">
         <label class="layui-form-label">客户名称</label>
         <div class="layui-input-inline form-length350">
-            <input type="text" name="name" lay-verify="required|username"
+            <input type="text" name="name" lay-verify="required"
                    placeholder="请输入客户名称" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-form-mid layui-word-aux">*6-12个字符</div>
@@ -78,32 +80,36 @@
         </div>
     </div>
 
-
-  <!--  <div class="layui-form-item">
-        <div class="layui-col-md4 layui-col-md-offset2">
-            <label class="layui-form-label">头像</label>
-            <div class="layui-input-inline">
-                <button type="button" class="layui-btn" id="test1">
-                    <i class="layui-icon">&#xe67c;</i>上传图片
-                </button>
-                <input type="hidden" id="photo" name="photo" value="">
-            </div>
+    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
+        <label class="layui-form-label">回访日期</label>
+        <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+            <input type="text" class="layui-input" name="visitDate" id="visitDate">
         </div>
-    </div>-->
+    </div>
+
+
+    <!--  <div class="layui-form-item">
+          <div class="layui-col-md4 layui-col-md-offset2">
+              <label class="layui-form-label">头像</label>
+              <div class="layui-input-inline">
+                  <button type="button" class="layui-btn" id="test1">
+                      <i class="layui-icon">&#xe67c;</i>上传图片
+                  </button>
+                  <input type="hidden" id="photo" name="photo" value="">
+              </div>
+          </div>
+      </div>-->
     <div class="layui-form-item layui-col-md-offset5">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="add">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="add" type="button">立即提交</button>
             <button id="closeBtn" type="button" class="layui-btn layui-btn-primary">取消</button>
         </div>
     </div>
 </form>
-<script type="text/javascript" src="/js/layui/layui.all.js"></script>
-<script type="text/javascript" src="/js/common/common.js"></script>\
-<script th:src="@{/js/common/verify.js}"></script>
+<!--<script type="text/javascript" src="/js/layui/layui.all.js"></script>-->
 <script th:inline="javascript">
     layui.use('form', function () {
         var form = layui.form, $ = layui.jquery;
-        form.render();
         // Common.uploadFile('#test1', upload, function (data) {
         //     $("#photo").val(data);
         //     $("#previewPhoto img").attr("src", defaultImageViewPath + data);
@@ -122,6 +128,14 @@
         $("#closeBtn").on('click', function () {
             Common.closeFrame();
         });
+
+        // 初始化日期组件
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#visitDate'
+        });
+
+        form.render();
     });
 </script>
 </body>
