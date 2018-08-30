@@ -23,4 +23,9 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     public int insertCustomer(CustomerDetail customerDetail) {
         return customerDetailDao.insertCustomer(customerDetail);
     }
+
+    @Override
+    public int deleteCustomer(String id) {
+        return customerDetailDao.deleteCustomer(id);
+    }
 }

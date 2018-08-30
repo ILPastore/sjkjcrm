@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 客户管理模块controller
@@ -31,7 +32,6 @@ public class CustomerController extends BaseController {
     @RequestMapping("/list")
     @ResponseBody
     public ResultModel<List<CustomerDetail>> queryCustomerListByCondition(Page<CustomerDetail> page) {
-        System.out.println(page.getCondition());
         List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
         return new ResultModel<>("0", "", customerDetailList);
     }
@@ -71,6 +71,20 @@ public class CustomerController extends BaseController {
     @ResponseBody
     public ResultModel insertCustomer(CustomerDetail customerDetail) {
         customerDetailService.insertCustomer(customerDetail);
+        return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
+    }
+
+    /**
+     * 删除客户信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteCustomer")
+    @ResponseBody
+    public ResultModel deleteCustomer(@RequestParam(name = "id", required = true) String id) {
+        if (!Objects.isNull(id)) {
+            customerDetailService.deleteCustomer(id);
+        }
         return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
     }
 

@@ -1,12 +1,10 @@
 package com.sjkjcrm.dao;
 
-import com.sjkjcrm.bean.customer.CustomerDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +17,7 @@ import java.util.Map;
  * @author Zhang Qiao
  */
 @Repository
-public class BaseDao extends JdbcDaoSupport {
+public class BaseDao<T> extends JdbcDaoSupport {
 
     @Autowired
     private DataSource dataSource;
@@ -58,8 +56,7 @@ public class BaseDao extends JdbcDaoSupport {
         return row.get(0);
     }
 
-    @SuppressWarnings("")
-    public List<Class<?>> queryList(String sql, Object[] args, Class<?> cls) {
+    public List<T> queryList(String sql, Object[] args, Class<?> cls) {
         return getWrapTemplate().query(sql, args, new BeanPropertyRowMapper(cls));
     }
 

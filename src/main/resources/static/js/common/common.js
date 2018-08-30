@@ -186,6 +186,7 @@ var Common = function () {
             searchTable(formId, table, isPage);
         },
         uploadFile: function (eleId, layUpload, done, extendParam, error, accept, exts) {
+            console.log(layUpload);
             upload(eleId, layUpload, done, extendParam, error, accept, exts);
         },
         openFrame: function (url, title, width, height, endFunction) {

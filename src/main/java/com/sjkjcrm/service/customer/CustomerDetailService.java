@@ -18,4 +18,11 @@ public interface CustomerDetailService {
      * @param customerDetail
      */
     public int insertCustomer(CustomerDetail customerDetail);
+
+    /**
+     * 删除客户信息
+     * @param id
+     * @return
+     */
+    public int deleteCustomer(String id);
 }
