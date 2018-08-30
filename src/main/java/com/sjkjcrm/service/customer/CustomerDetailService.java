@@ -10,5 +10,11 @@ public interface CustomerDetailService {
      * 获取所有的客户信息
      * @return
      */
-    List<CustomerDetail> getAll();
+    public List<CustomerDetail> getAll();
+
+    /**
+     * 新增客户信息
+     * @param customerDetail
+     */
+    public int insertCustomer(CustomerDetail customerDetail);
 }

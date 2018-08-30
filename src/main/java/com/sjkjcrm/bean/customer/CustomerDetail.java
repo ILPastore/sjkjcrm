@@ -4,6 +4,8 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Id;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -19,6 +21,7 @@ public class CustomerDetail {
      * 主键
      */
     @Excel(name = "ID")
+    @Id
     private String customerId;
 
     /**
@@ -86,4 +89,9 @@ public class CustomerDetail {
      */
     @Excel(name= "联系人", orderNum = "11")
     private String linkman;
+
+    /**
+     * 创建时间
+     */
+    private Timestamp createTime;
 }

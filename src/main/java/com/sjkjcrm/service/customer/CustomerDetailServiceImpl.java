@@ -17,4 +17,9 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     public List<CustomerDetail> getAll() {
         return customerDetailDao.findAll();
     }
+
+    @Override
+    public int insertCustomer(CustomerDetail customerDetail) {
+        return customerDetailDao.insertCustomer(customerDetail);
+    }
 }

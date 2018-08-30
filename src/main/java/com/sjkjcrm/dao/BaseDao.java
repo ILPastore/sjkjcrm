@@ -1,9 +1,14 @@
 package com.sjkjcrm.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +16,16 @@ import java.util.Map;
  * 封装dao的基本操作
  * @author Zhang Qiao
  */
+@Repository
 public class BaseDao extends JdbcDaoSupport {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @PostConstruct
+    private void initialize() {
+        setDataSource(dataSource);
+    }
 
     /**
      * 查询单条记录

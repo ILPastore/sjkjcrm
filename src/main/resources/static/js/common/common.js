@@ -112,6 +112,7 @@ var Common = function () {
                 url: ajaxUrl,
                 data: data,
                 success: function (responseJson) {
+                    console.log(responseJson);
                     if (typeof (successFn) === 'function' && responseJson.code === '0') {
                         successFn(responseJson);
                     } else {

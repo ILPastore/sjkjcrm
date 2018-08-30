@@ -14,5 +14,6 @@ create table customer_detail(
     corp_grade varchar(30) comment '公司级别',
     visit_date datetime comment '回访日期',
     linkman varchar(10) comment '联系人',
+    create_time timestamp not null commont '创建时间',
     primary key (customer_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户信息详情表';
