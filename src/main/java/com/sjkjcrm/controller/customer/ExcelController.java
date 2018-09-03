@@ -33,7 +33,7 @@ public class ExcelController {
 
         // 导出操作
         try {
-            ExcelUtils.exportExcel(customerDetailList, "客户列表", "客户信息", CustomerDetail.class, "客户信息.xls", response);
+            ExcelUtils.exportExcel(customerDetailList, "客户列表", "客户信息", CustomerDetail.class, "customertemplate.xls", response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +41,7 @@ public class ExcelController {
 
     @RequestMapping("/importExcel2")
     public void importExcel() {
-        String filePath = "D:\\客户信息.xls";
+        String filePath = "D:\\customertemplate.xls";
         // 解析excel，
         try {
             List<CustomerDetail> customerDetailList = ExcelUtils.importExcel(filePath, 1, 1, CustomerDetail.class);

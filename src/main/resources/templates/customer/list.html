@@ -57,6 +57,9 @@
                 <button type="button" class="layui-btn layui-btn-primary" id="importBtn"><i class="layui-icon">
                     &#xe61e;</i>导入
                 </button>
+                <button type="button" class="layui-btn layui-btn-primary" id="downloadFileBtn"><i class="layui-icon">
+                    &#xe61e;</i>模板下载
+                </button>
             </div>
         </div>
     </form>
@@ -86,7 +89,7 @@
     layui.use('table', function () {
         var cols = [[
             {field: 'checkBox', checkbox: true, fixed: true}
-            , {field: 'customerId', title: '主键', hidden:true}
+            // , {field: 'customerId', title: '主键', hide:true}
             , {field: 'name', title: '客户名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
             , {field: 'number', title: '客户编号', sort: true}
             , {field: 'phone', title: '联系电话'}
@@ -137,27 +140,56 @@
         });
 
         $('#importBtn').on('click', function () {
-            /*Common.uploadFile('#importBtn', upload, function (data) {
-                $("#photo").val(data);
-                $("#previewPhoto img").attr("src", defaultImageViewPath + data);
-            }, {category: 'photo'});*/
+            // Common.uploadFile('#importBtn', upload, function (data) {
+            //     $("#photo").val(data);
+            //     $("#previewPhoto img").attr("src", defaultImageViewPath + data);
+            // }, {category: 'photo'});
 
-            upload.render({
-                elem: '#importBtn'
-                , url: basePath + '/customer/importExcel'
-                , accept: 'file' // 普通文件
-                , multiple: true
-                , done: function (res) {
-                    console.log(res);
-                }
-            });
+
+            Common.uploadFile('#importBtn', upload, function (data) {
+
+            }, {category: 'xls'})
+
+            // upload.render({
+            //     elem: '#importBtn'
+            //     , url: basePath + '/customer/importExcel.do'
+            //     , done: function (res) {
+            //         console.log(res);
+            //     }, error: function () {
+            //         layer.msg('上传失败');
+            //     }
+            // });
         });
+    });
+
+    $('#downloadFileBtn').on('click', function () {
+        location.href = basePath + '/excel/customertemplate.xls';
     });
 
     layui.use('form', function () {
         var form = layui.form;
         form.render();
     });
+
+    // layui.use('upload', function () {
+    //     var upload = layui.upload;
+    //
+    //     //执行实例
+    //     var uploadInst = upload.render({
+    //         elem: '#yingyezhizhao' //绑定元素
+    //         , url: '../app/upload/changeImg' //上传接口
+    //
+    //         , done: function (res) {
+    //             //上传完毕回调
+    //             $('#yingyezhizhao_preview').attr('src', '../' + data.data);
+    //             layer.msg('上传成功！');
+    //         }
+    //         , error: function () {
+    //             layer.msg('上传失败');
+    //         }
+    //     });
+    // });
+
 </script>
 </body>
 </html>

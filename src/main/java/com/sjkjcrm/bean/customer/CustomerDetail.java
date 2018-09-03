@@ -20,7 +20,6 @@ public class CustomerDetail {
     /**
      * 主键
      */
-    @Excel(name = "ID")
     @Id
     private String customerId;
 
