@@ -21,9 +21,15 @@ spring:
       suffix: .html
       encoding: UTF-8
       mode: HTML5
-  mvc:
-    static-path-pattern: /**
+  servlet:
+    multipart:
+      max-file-size: 10M
+      max-request-size: 10M
 
+#  mvc:
+#    static-path-pattern: /templates/*
     # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
   resources:
     staticLocations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/
+

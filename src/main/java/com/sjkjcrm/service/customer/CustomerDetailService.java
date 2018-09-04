@@ -2,6 +2,7 @@ package com.sjkjcrm.service.customer;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.sjkjcrm.bean.customer.CustomerDetail;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,4 +26,11 @@ public interface CustomerDetailService {
      * @return
      */
     public int deleteCustomer(String id);
+
+    /**
+     * 导入excel
+     * @param fileName
+     * @param file
+     */
+    void importExcel(String fileName, MultipartFile file);
 }

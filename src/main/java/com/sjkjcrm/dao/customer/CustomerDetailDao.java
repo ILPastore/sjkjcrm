@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.sjkjcrm.bean.customer.CustomerDetail;
 import com.sjkjcrm.dao.BaseDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -73,5 +74,14 @@ public class CustomerDetailDao {
     public int deleteCustomer(String id) {
         String sql = "delete from customer_detail where customer_id = ?";
         return this.baseDao.update(sql, new Object[]{id});
+    }
+
+    /**
+     * 批量新增客户信息
+     * @return
+     */
+    public int[] batchInsertCustomer(BatchPreparedStatementSetter batchPreparedStatementSetter) {
+        String sql = "insert into customer_detail(customer_id, name, number, type, phone, corp_tel, mail, address, corp_type, corp_grade, visit_date, linkman) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return baseDao.executeBatch(sql, batchPreparedStatementSetter);
     }
 }

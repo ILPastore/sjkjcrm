@@ -10,7 +10,7 @@
 <fieldset class="layui-elem-field">
     <legend>条件搜索</legend>
     <form class="layui-form" style="text-align: left" id="searchForm">
-        <div class="layui-form-item layui-col-md6 layui-col-md"> <!--layui-col-md-offset2-->
+        <div class="layui-form-item"> <!--layui-col-md6 layui-col-md-->
             <div class="layui-inline">
                 <label class="layui-form-label">客户名称</label>
                 <div class="layui-input-inline">
@@ -117,33 +117,31 @@
                         });
                     });
                 });
-            } else if (layEvent === 'edit') { //编辑
+            } else if (layEvent === 'edit') { // 编辑
                 Common.openFrame('/sys/user/to-edit?id=' + data.id, '修改用户信息', '800px', '500px', function () {
                     $('#searchBtn').click();
                 });
             }
         });
-        //
 
+        var initTable = Common.initTable('#customerTable', '/customer/list', cols, table);
 
-        //多图片上传
         upload.render({
             elem: '#importBtn'
             , url: basePath + '/customer/importExcel'
             , accept: 'file'
             , multiple: true
             , before: function (obj) {
-                alert(obj);
+                console.log(obj);
             }
             , done: function (res) {
-                //上传完毕
+                layer.msg('导入完成');
+                Common.searchTable('searchForm', initTable);
             }, error: function () {
-                layer.msg('上传失败');
+                layer.msg('导入失败');
             }
         });
 
-
-        var initTable = Common.initTable('#customerTable', '/customer/list', cols, table);
         $('#searchBtn').on('click', function () {
             Common.searchTable('searchForm', initTable);
         });

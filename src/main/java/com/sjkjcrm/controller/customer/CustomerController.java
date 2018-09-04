@@ -120,30 +120,13 @@ public class CustomerController extends BaseController {
      */
     @RequestMapping(value = "/importExcel", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
-    public Map<String, Object> importExcel(HttpServletRequest request, HttpServletResponse response) {
-        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
-        //取得request中的所有文件名
-        List<MultipartFile> fileList =  multiRequest.getFiles("file");
-        System.out.println(fileList.size());
-
-//        if (file.isFile()) {
-//            System.out.println(123321);
-//        }
-//        String filePath = "D:\\customertemplate.xls";
-//        // 解析excel，
-//        try {
-//            List<CustomerDetail> customerDetailList = ExcelUtils.importExcel(filePath, 1, 1, CustomerDetail.class);
-//            // 也可以使用MultipartFile,使用 FileUtil.importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass)导入
-//            System.out.println("导入数据一共【" + customerDetailList.size() + "】行");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        //TODO 保存数据库
-        // xianyunpeng555
-
-      //  return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
-        return  null;
-
+    public ResultModel importExcel(@RequestParam("file") MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        try {
+            customerDetailService.importExcel(fileName, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
     }
 }
