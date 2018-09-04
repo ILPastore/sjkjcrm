@@ -10,13 +10,14 @@ import com.sjkjcrm.util.layui.ResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -48,12 +49,13 @@ public class CustomerController extends BaseController {
 
     /**
      * 新增客户
+     *
      * @param id
      * @param model
      * @return
      */
     @GetMapping("/addcustomer")
-    public String addCustomer(@RequestParam(name = "id",required = false)String id, Model model) {
+    public String addCustomer(@RequestParam(name = "id", required = false) String id, Model model) {
 //        SysMenu sysMenu = menuService.getById(id).getData();
 //        if (sysMenu == null){
 //            sysMenu = new SysMenu();
@@ -65,6 +67,7 @@ public class CustomerController extends BaseController {
 
     /**
      * 新增客户信息
+     *
      * @return
      */
     @RequestMapping("/insert")
@@ -77,6 +80,7 @@ public class CustomerController extends BaseController {
 
     /**
      * 删除客户信息
+     *
      * @param id
      * @return
      */
@@ -91,6 +95,7 @@ public class CustomerController extends BaseController {
 
     /**
      * excel导出
+     *
      * @param response
      */
     @RequestMapping("/export")
@@ -103,7 +108,7 @@ public class CustomerController extends BaseController {
 
         // 导出操作
         try {
-            ExcelUtils.exportExcel(customerDetailList, "客户列表", "客户信息", CustomerDetail.class, "客户信息.xls", response);
+            ExcelUtils.exportExcel(customerDetailList, "客户列表", "客户信息", CustomerDetail.class, "customertemplate.xls", response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,9 +117,13 @@ public class CustomerController extends BaseController {
     /**
      * excel导入
      */
-    @RequestMapping("/importExcel")
-    public void importExcel() {
-        String filePath = "D:\\客户信息.xls";
+    @RequestMapping(value = "/importExcel", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public Map<String, Object> importExcel(@RequestParam File file, HttpServletRequest request, HttpServletResponse response) {
+        if (file.isFile()) {
+            System.out.println(123321);
+        }
+        String filePath = "D:\\customertemplate.xls";
         // 解析excel，
         try {
             List<CustomerDetail> customerDetailList = ExcelUtils.importExcel(filePath, 1, 1, CustomerDetail.class);
@@ -126,5 +135,7 @@ public class CustomerController extends BaseController {
 
         //TODO 保存数据库
         // xianyunpeng555
+
+        return null;
     }
 }
