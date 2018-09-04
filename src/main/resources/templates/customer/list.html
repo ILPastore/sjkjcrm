@@ -86,7 +86,7 @@
     <!--</div>-->
 </script>
 <script th:inline="javascript">
-    layui.use('table', function () {
+    layui.use(['upload', 'table'], function () {
         var cols = [[
             {field: 'checkBox', checkbox: true, fixed: true}
             // , {field: 'customerId', title: '主键', hide:true}
@@ -123,6 +123,26 @@
                 });
             }
         });
+        //
+
+
+        //多图片上传
+        upload.render({
+            elem: '#importBtn'
+            , url: basePath + '/customer/importExcel'
+            , accept: 'file'
+            , multiple: true
+            , before: function (obj) {
+                alert(obj);
+            }
+            , done: function (res) {
+                //上传完毕
+            }, error: function () {
+                layer.msg('上传失败');
+            }
+        });
+
+
         var initTable = Common.initTable('#customerTable', '/customer/list', cols, table);
         $('#searchBtn').on('click', function () {
             Common.searchTable('searchForm', initTable);
@@ -138,28 +158,6 @@
         $('#exportBtn').on('click', function () {
             window.location.href = basePath + '/customer/export';
         });
-
-        $('#importBtn').on('click', function () {
-            // Common.uploadFile('#importBtn', upload, function (data) {
-            //     $("#photo").val(data);
-            //     $("#previewPhoto img").attr("src", defaultImageViewPath + data);
-            // }, {category: 'photo'});
-
-
-            Common.uploadFile('#importBtn', upload, function (data) {
-
-            }, {category: 'xls'})
-
-            // upload.render({
-            //     elem: '#importBtn'
-            //     , url: basePath + '/customer/importExcel.do'
-            //     , done: function (res) {
-            //         console.log(res);
-            //     }, error: function () {
-            //         layer.msg('上传失败');
-            //     }
-            // });
-        });
     });
 
     $('#downloadFileBtn').on('click', function () {
@@ -170,26 +168,6 @@
         var form = layui.form;
         form.render();
     });
-
-    // layui.use('upload', function () {
-    //     var upload = layui.upload;
-    //
-    //     //执行实例
-    //     var uploadInst = upload.render({
-    //         elem: '#yingyezhizhao' //绑定元素
-    //         , url: '../app/upload/changeImg' //上传接口
-    //
-    //         , done: function (res) {
-    //             //上传完毕回调
-    //             $('#yingyezhizhao_preview').attr('src', '../' + data.data);
-    //             layer.msg('上传成功！');
-    //         }
-    //         , error: function () {
-    //             layer.msg('上传失败');
-    //         }
-    //     });
-    // });
-
 </script>
 </body>
 </html>

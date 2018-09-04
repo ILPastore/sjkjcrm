@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -119,23 +120,30 @@ public class CustomerController extends BaseController {
      */
     @RequestMapping(value = "/importExcel", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
-    public Map<String, Object> importExcel(@RequestParam File file, HttpServletRequest request, HttpServletResponse response) {
-        if (file.isFile()) {
-            System.out.println(123321);
-        }
-        String filePath = "D:\\customertemplate.xls";
-        // 解析excel，
-        try {
-            List<CustomerDetail> customerDetailList = ExcelUtils.importExcel(filePath, 1, 1, CustomerDetail.class);
-            // 也可以使用MultipartFile,使用 FileUtil.importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass)导入
-            System.out.println("导入数据一共【" + customerDetailList.size() + "】行");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public Map<String, Object> importExcel(HttpServletRequest request, HttpServletResponse response) {
+        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
+        //取得request中的所有文件名
+        List<MultipartFile> fileList =  multiRequest.getFiles("file");
+        System.out.println(fileList.size());
+
+//        if (file.isFile()) {
+//            System.out.println(123321);
+//        }
+//        String filePath = "D:\\customertemplate.xls";
+//        // 解析excel，
+//        try {
+//            List<CustomerDetail> customerDetailList = ExcelUtils.importExcel(filePath, 1, 1, CustomerDetail.class);
+//            // 也可以使用MultipartFile,使用 FileUtil.importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass)导入
+//            System.out.println("导入数据一共【" + customerDetailList.size() + "】行");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         //TODO 保存数据库
         // xianyunpeng555
 
-        return null;
+      //  return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
+        return  null;
+
     }
 }
