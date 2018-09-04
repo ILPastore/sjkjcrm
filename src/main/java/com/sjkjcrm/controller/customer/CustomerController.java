@@ -70,6 +70,7 @@ public class CustomerController extends BaseController {
     @RequestMapping("/insert")
     @ResponseBody
     public ResultModel insertCustomer(CustomerDetail customerDetail) {
+        System.out.println(customerDetail.getName());
         customerDetailService.insertCustomer(customerDetail);
         return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
     }
