@@ -48,6 +48,11 @@ public class CustomerController extends BaseController {
         return "customer/list";
     }
 
+    @RequestMapping("/welcome")
+    public String welcome() {
+        return "welcome";
+    }
+
     /**
      * 新增客户
      *
@@ -57,12 +62,6 @@ public class CustomerController extends BaseController {
      */
     @GetMapping("/addcustomer")
     public String addCustomer(@RequestParam(name = "id", required = false) String id, Model model) {
-//        SysMenu sysMenu = menuService.getById(id).getData();
-//        if (sysMenu == null){
-//            sysMenu = new SysMenu();
-//            sysMenu.setParentNode(new SysMenu());
-//        }
-//        model.addAttribute("sysMenu",sysMenu);
         return "customer/edit";
     }
 
@@ -96,7 +95,6 @@ public class CustomerController extends BaseController {
 
     /**
      * excel导出
-     *
      * @param response
      */
     @RequestMapping("/export")
