@@ -27,8 +27,8 @@ spring:
       max-request-size: 10M
 
 #  mvc:
-#    static-path-pattern: /templates/*
-    # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+#    static-path-pattern: /static/*
+     #默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
   resources:
     staticLocations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/

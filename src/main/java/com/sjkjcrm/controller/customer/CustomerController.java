@@ -12,13 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -55,7 +51,6 @@ public class CustomerController extends BaseController {
 
     /**
      * 新增客户
-     *
      * @param id
      * @param model
      * @return
@@ -67,7 +62,6 @@ public class CustomerController extends BaseController {
 
     /**
      * 新增客户信息
-     *
      * @return
      */
     @RequestMapping("/insert")
@@ -80,7 +74,6 @@ public class CustomerController extends BaseController {
 
     /**
      * 删除客户信息
-     *
      * @param id
      * @return
      */

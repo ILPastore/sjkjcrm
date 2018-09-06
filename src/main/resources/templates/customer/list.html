@@ -70,11 +70,11 @@
 <script type="text/html" id="toolBars">
     <!--<div class="layui-btn-group">-->
     <!--<button class="layui-btn layui-btn-sm" lay-event="detail" th:title="查看">-->
-        <!--<i class="layui-icon">&#xe60a;</i>-->
+    <!--<i class="layui-icon">&#xe60a;</i>-->
     <!--</button>-->
 
     <!--<button shiro:hasPermission="sys:user:edit" class="layui-btn layui-btn-sm" lay-event="edit" th:title="修改">-->
-        <!--<i class="layui-icon">&#xe642;</i>-->
+    <!--<i class="layui-icon">&#xe642;</i>-->
     <!--</button>-->
     <button class="layui-btn layui-btn-sm" lay-event="del" th:title="删除">
         <i class="layui-icon">&#xe640;</i>
@@ -84,7 +84,6 @@
     layui.use(['upload', 'table'], function () {
         var cols = [[
             {field: 'checkBox', checkbox: true, fixed: true}
-            // , {field: 'customerId', title: '主键', hide:true}
             , {field: 'name', title: '客户名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
             , {field: 'number', title: '客户编号', sort: true}
             , {field: 'phone', title: '联系电话'}
@@ -142,7 +141,6 @@
         });
 
         $("#addBtn").on('click', function () {
-            // Common.openFrame('/customer/edit.html', '添加客户信息', '600px', '500px', function () {
             Common.openFrame('/customer/addcustomer', '添加客户信息', '600px', '500px', function () {
                 $('#searchBtn').click();
             });

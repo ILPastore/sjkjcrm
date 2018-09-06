@@ -14,7 +14,6 @@ var Common = function () {
                 limitName: 'size'
             },
             done: function (res, curr, count) {
-                alert(res);
                 console.log(res);
                 if (typeof(doneCallBack) === "function") {
                     doneCallBack(res);

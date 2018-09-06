@@ -28,14 +28,14 @@
                         <span class="us_uer"></span>
                         <input name="password" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;" value="123456" type="password" placeholder="请输入密码">
                     </div>
-                    <div style="display: flex">
+                    <!--<div style="display: flex">
                         <div class="input_outer" style="width: 200px;">
                             <span class="us_verify"></span>
                             <input name="kaptcha" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;width: 200px;"value="" type="text" placeholder="验证码" >
                         </div>
                         <img align="absmiddle" id="kaptchaImg" src="/kaptcha.jpg"
                              style="height: 46px;padding: 0 5px"/>
-                    </div>
+                    </div>-->
                     <div style="color: white;font-size: 14px;display: none;text-align: center" id="errorMsg">*这是错误信息</div>
                     <div class="mb2" ><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
             </div>
@@ -51,7 +51,7 @@
     $(function () {
         $(".mb2").on('click',function () {
             $.ajax({
-                url: '/login',
+                url: '/validate/loginPost',
                 method: 'POST',
                 data: {
                     username:$('input[name=username]').val(),
