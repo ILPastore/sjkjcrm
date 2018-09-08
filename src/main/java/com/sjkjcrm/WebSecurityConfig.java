@@ -42,15 +42,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //        addInterceptor.excludePathPatterns("/static");
 //        super.addInterceptors(registry);
 
-        addInterceptor.addPathPatterns("/**")
-                .excludePathPatterns("/login", "/login/main", "/static/**", "/error", "/css/**", "/js/**", "/images/**");
+//        addInterceptor.addPathPatterns("/**").excludePathPatterns("/validate/**", "/static/**", "/error", "/css/**", "/customer/**");
+        addInterceptor.addPathPatterns("/**").excludePathPatterns("/validate/**", "/static/**", "/error", "/css/**", "/js/**", "/images/**", "/customer/**");
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
 
         @Override
-        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-                throws Exception {
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
             log.info(request.getRequestURL().toString());
             HttpSession session = request.getSession();
             if (session.getAttribute(SESSION_KEY) != null) {
@@ -58,7 +57,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
             }
 
             // 跳转登录
-            String url = "/login";
+            String url = "/validate/login";
             response.sendRedirect(url);
             return false;
         }
@@ -71,9 +70,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/resources/static/css/");
 //    }
 
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("").setViewName("");
-//        super.addViewControllers(registry);
-//    }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/customer/homepage").setViewName("customer/home");
+//        registry.addViewController("/customer/customerpage").setViewName("customer/list");
+        registry.addViewController("/customer/welcome").setViewName("welcome");
+        registry.addViewController("/customer/addcustomer").setViewName("customer/edit");
+        registry.addViewController("/validate/login").setViewName("login");
+    }
 }

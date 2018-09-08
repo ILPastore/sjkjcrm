@@ -1,10 +1,11 @@
 package com.sjkjcrm.controller.login;
 
-import com.sjkjcrm.WebMvcConfig;
+import com.sjkjcrm.WebSecurityConfig;
 import com.sjkjcrm.util.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -15,12 +16,8 @@ import java.util.Map;
  * 验证登录controller
  */
 @Controller
+@RequestMapping("/validate")
 public class LoginController extends BaseController {
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 
     @PostMapping("/loginPost")
     @ResponseBody
@@ -33,17 +30,18 @@ public class LoginController extends BaseController {
         }
 
         // 设置session
-        session.setAttribute(WebMvcConfig.SESSION_KEY, account);
+        session.setAttribute(WebSecurityConfig.SESSION_KEY, account);
 
         map.put("success", true);
         map.put("message", "登录成功");
+        map.put("code", "0");
         return map;
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         // 移除session
-        session.removeAttribute(WebMvcConfig.SESSION_KEY);
+        session.removeAttribute(WebSecurityConfig.SESSION_KEY);
         return "redirect:/login";
     }
 

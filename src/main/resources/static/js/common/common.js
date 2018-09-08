@@ -4,14 +4,16 @@ var Common = function () {
             elem: ele
             , url: url
             , method: 'POST'
-            , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cellMinWidth: 80 // 全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: cols
-            , page: {
-                limits: [10, 20, 50, 100]
-            },
+            , page:true,
+            // , page: {
+            //     limits: [10, 20, 50, 100]
+            // },
             request: {
                 pageName: 'current',
-                limitName: 'size'
+                limitName: 'size',
+                size: 'size'
             },
             done: function (res, curr, count) {
                 console.log(res);
@@ -45,7 +47,7 @@ var Common = function () {
         } else {
             page = {curr: 1}
         }
-        // console.log(page);
+        console.log(page);
         tableIns.reload({
             where: {condition: queryParams},
             page: page
@@ -128,11 +130,9 @@ var Common = function () {
 
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-
                 }
             });
         })
-
     };
     
     var initChart = function (selectorId,type) {
@@ -163,8 +163,8 @@ var Common = function () {
         return myChart;
     }
     var closeFrame = function () {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index); //再执行关闭
+        var index = parent.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
+        parent.layer.close(index); // 再执行关闭
     };
 
     var boolFormat = function (value) {

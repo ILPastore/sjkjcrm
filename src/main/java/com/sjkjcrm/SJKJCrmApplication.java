@@ -2,6 +2,8 @@ package com.sjkjcrm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ public class SJKJCrmApplication {
 
     /**
      * 文件上传配置
+     *
      * @return
      */
     @Bean
@@ -25,6 +28,18 @@ public class SJKJCrmApplication {
         factory.setMaxRequestSize("102400KB");
         return factory.createMultipartConfig();
     }
+
+    // todo 此处需要配置session的失效时间，待完成！！！
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
+        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
+            @Override
+            public void customize(ConfigurableWebServerFactory factory) {
+//                factory.setPort(8081);
+            }
+        };
+    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(SJKJCrmApplication.class, args);

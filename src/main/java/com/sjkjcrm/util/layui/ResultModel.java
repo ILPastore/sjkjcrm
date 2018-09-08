@@ -19,6 +19,11 @@ public class ResultModel<T> implements Serializable {
     private String msg;
 
     /**
+     * 总记录
+     */
+    private String count;
+
+    /**
      * 返回内容
      */
     private T data;
@@ -57,6 +62,13 @@ public class ResultModel<T> implements Serializable {
         this.msg = msg;
     }
 
+    public ResultModel(String code, String msg, String count, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.count = count;
+        this.data = data;
+    }
+
     public ResultModel(String code, String msg, T data) {
         this.code = code;
         this.msg = msg;
@@ -92,5 +104,13 @@ public class ResultModel<T> implements Serializable {
 
     public static void main(String[] args) {
         System.out.println(StringUtil.isNotEmpty(null));
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
     }
 }

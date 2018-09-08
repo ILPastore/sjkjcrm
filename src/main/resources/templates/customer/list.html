@@ -73,15 +73,15 @@
     <!--<i class="layui-icon">&#xe60a;</i>-->
     <!--</button>-->
 
-    <!--<button shiro:hasPermission="sys:user:edit" class="layui-btn layui-btn-sm" lay-event="edit" th:title="修改">-->
-    <!--<i class="layui-icon">&#xe642;</i>-->
-    <!--</button>-->
+    <button shiro:hasPermission="sys:user:edit" class="layui-btn layui-btn-sm" lay-event="edit" th:title="修改">
+    <i class="layui-icon">&#xe642;</i>
+    </button>
     <button class="layui-btn layui-btn-sm" lay-event="del" th:title="删除">
         <i class="layui-icon">&#xe640;</i>
     </button>
 </script>
 <script th:inline="javascript">
-    layui.use(['upload', 'table'], function () {
+    layui.use(['upload', 'table', 'laypage'], function () {
         var cols = [[
             {field: 'checkBox', checkbox: true, fixed: true}
             , {field: 'name', title: '客户名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
@@ -96,13 +96,13 @@
             , {field: 'linkman', title: '联系人'}
             , {field: 'op', title: '操作', align: 'center', toolbar: '#toolBars'} //这里的toolbar值是模板元素的选择器
         ]];
-        var table = layui.table, $ = layui.jquery, upload = layui.upload;
+        var table = layui.table, $ = layui.jquery, upload = layui.upload, laypage = layui.laypage;
         table.on('tool(userFilter)', function (obj) {
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            if (layEvent === 'detail') { //查看
+            var data = obj.data; // 获得当前行数据
+            var layEvent = obj.event; // 获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if (layEvent === 'detail') { // 查看
                 Common.openFrame('/sys/user/detail?id=' + data.id, '用户信息', '800px', '500px');
-            } else if (layEvent === 'del') { //删除
+            } else if (layEvent === 'del') { // 删除
                 layer.confirm('真的删除行么', function (index) {
                     Common.ajaxFormSubmit('/customer/deleteCustomer', {id: data.customerId}, function (data) {
                         layer.close(index);
@@ -112,7 +112,7 @@
                     });
                 });
             } else if (layEvent === 'edit') { // 编辑
-                Common.openFrame('/sys/user/to-edit?id=' + data.id, '修改用户信息', '800px', '500px', function () {
+                Common.openFrame('/customer/editCustomer?id=' + data.customerId, '修改用户信息', '800px', '500px', function () {
                     $('#searchBtn').click();
                 });
             }
@@ -149,10 +149,10 @@
         $('#exportBtn').on('click', function () {
             window.location.href = basePath + '/customer/export';
         });
-    });
 
-    $('#downloadFileBtn').on('click', function () {
-        location.href = basePath + '/excel/customertemplate.xls';
+        $('#downloadFileBtn').on('click', function () {
+            location.href = basePath + '/excel/customertemplate.xls';
+        });
     });
 
     layui.use('form', function () {

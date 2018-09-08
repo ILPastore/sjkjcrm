@@ -31,32 +31,35 @@ public class CustomerController extends BaseController {
     @ResponseBody
     public ResultModel<List<CustomerDetail>> queryCustomerListByCondition(Page<CustomerDetail> page) {
         List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
-        return new ResultModel<>("0", "", customerDetailList);
+        return new ResultModel<>("0", "", customerDetailList.size() + "", customerDetailList);
     }
 
-    @RequestMapping("/homepage")
-    public String homepage() {
-        return "customer/home";
-    }
+//    @RequestMapping("/homepage")
+//    public String homepage() {
+//        return "customer/home";
+//    }
 
     @RequestMapping("/customerpage")
     public String customerPage() {
         return "customer/list";
     }
+//
+//    @RequestMapping("/welcome")
+//    public String welcome() {
+//        return "welcome";
+//    }
 
-    @RequestMapping("/welcome")
-    public String welcome() {
-        return "welcome";
-    }
+//    /**
+//     * 新增客户
+//     * @param id
+//     * @param model
+//     * @return
+//     */
+    @GetMapping("/editCustomer")
+    public String editCustomer(@RequestParam(name = "id", required = false) String id, Model model) {
+        System.out.println("id=====" + id);
 
-    /**
-     * 新增客户
-     * @param id
-     * @param model
-     * @return
-     */
-    @GetMapping("/addcustomer")
-    public String addCustomer(@RequestParam(name = "id", required = false) String id, Model model) {
+
         return "customer/edit";
     }
 
@@ -67,7 +70,6 @@ public class CustomerController extends BaseController {
     @RequestMapping("/insert")
     @ResponseBody
     public ResultModel insertCustomer(CustomerDetail customerDetail) {
-        System.out.println(customerDetail.getName());
         customerDetailService.insertCustomer(customerDetail);
         return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
     }
