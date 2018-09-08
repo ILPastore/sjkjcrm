@@ -1,11 +1,9 @@
 package com.sjkjcrm;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +14,8 @@ import javax.servlet.http.HttpSession;
  * 登录配置
  */
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+@Slf4j
+public class WebSecurityConfig implements WebMvcConfigurer {
 
     /**
      * 登录session key
@@ -28,19 +27,23 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new SecurityInterceptor();
     }
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 
-        // 排除配置
+//        // 排除配置
 //        addInterceptor.excludePathPatterns("/error");
 //        addInterceptor.excludePathPatterns("/login**");
-//        addInterceptor.excludePathPatterns("/static/js/**");
-
-        // 拦截配置
+//        addInterceptor.excludePathPatterns("/static");
+//
+//        // 拦截配置
 //        addInterceptor.addPathPatterns("/**");
+//        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login");
+//        addInterceptor.excludePathPatterns("/static");
+//        super.addInterceptors(registry);
 
-        addInterceptor.addPathPatterns("**").excludePathPatterns("/static/**");
-        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login");
+        addInterceptor.addPathPatterns("/**")
+                .excludePathPatterns("/login", "/login/main", "/static/**", "/error", "/css/**", "/js/**", "/images/**");
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
@@ -48,6 +51,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
                 throws Exception {
+            log.info(request.getRequestURL().toString());
             HttpSession session = request.getSession();
             if (session.getAttribute(SESSION_KEY) != null) {
                 return true;
@@ -60,12 +64,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
         }
     }
 
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/resources/static/images/");
+//        registry.addResourceHandler("/js/**").addResourceLocations("classpath:./resources/static/js/");
+//        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/resources/static/css/");
+//    }
+
+//    @Override
 //    public void addViewControllers(ViewControllerRegistry registry) {
 //        registry.addViewController("").setViewName("");
 //        super.addViewControllers(registry);
 //    }
-
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-    }
 }
