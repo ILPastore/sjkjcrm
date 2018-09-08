@@ -1,19 +1,21 @@
 package com.sjkjcrm;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 /**
  * 登录配置
  */
 @Configuration
-public class WebSecurityConfig extends WebMvcConfigurerAdapter {
+@Slf4j
+public class WebSecurityConfig implements WebMvcConfigurer {
 
     /**
      * 登录session key
@@ -25,16 +27,23 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         return new SecurityInterceptor();
     }
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 
-        // 排除配置
-        addInterceptor.excludePathPatterns("/error");
-        addInterceptor.excludePathPatterns("/login**");
-        addInterceptor.excludePathPatterns("/static");
+//        // 排除配置
+//        addInterceptor.excludePathPatterns("/error");
+//        addInterceptor.excludePathPatterns("/login**");
+//        addInterceptor.excludePathPatterns("/static");
+//
+//        // 拦截配置
+//        addInterceptor.addPathPatterns("/**");
+//        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login");
+//        addInterceptor.excludePathPatterns("/static");
+//        super.addInterceptors(registry);
 
-        // 拦截配置
-        addInterceptor.addPathPatterns("/**");
+        addInterceptor.addPathPatterns("/**")
+                .excludePathPatterns("/login", "/login/main", "/static/**", "/error", "/css/**", "/js/**");
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
@@ -42,9 +51,11 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
                 throws Exception {
+            log.info(request.getRequestURL().toString());
             HttpSession session = request.getSession();
-            if (session.getAttribute(SESSION_KEY) != null)
+            if (session.getAttribute(SESSION_KEY) != null) {
                 return true;
+            }
 
             // 跳转登录
             String url = "/login";
@@ -53,8 +64,16 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         }
     }
 
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("").setViewName("");
-        super.addViewControllers(registry);
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/resources/static/images/");
+//        registry.addResourceHandler("/js/**").addResourceLocations("classpath:./resources/static/js/");
+//        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/resources/static/css/");
+//    }
+
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("").setViewName("");
+//        super.addViewControllers(registry);
+//    }
 }
