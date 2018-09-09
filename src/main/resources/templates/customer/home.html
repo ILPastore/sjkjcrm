@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -27,14 +27,14 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
+                    <var th:text="${session.user}"></var>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="/validate/logout">退出</a></li>
         </ul>
     </div>
 
@@ -116,6 +116,11 @@
             element.tabChange('mainTab', id);
         });
     });
+
+    // $(function () {
+    //     var username = '<%= session.getAttribute("username")%>';
+    //     console.log("username:::" + username);
+    // })
 </script>
 </body>
 </html>

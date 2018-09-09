@@ -31,7 +31,8 @@ public class CustomerController extends BaseController {
     @ResponseBody
     public ResultModel<List<CustomerDetail>> queryCustomerListByCondition(Page<CustomerDetail> page) {
         List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
-        return new ResultModel<>("0", "", customerDetailList.size() + "", customerDetailList);
+//        return super.getLayPage4List(new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailList));
+        return new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailList.size() + "", customerDetailList);
     }
 
 //    @RequestMapping("/homepage")
@@ -71,7 +72,7 @@ public class CustomerController extends BaseController {
     @ResponseBody
     public ResultModel insertCustomer(CustomerDetail customerDetail) {
         customerDetailService.insertCustomer(customerDetail);
-        return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
+        return new ResultModel(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg());
     }
 
     /**
@@ -85,7 +86,7 @@ public class CustomerController extends BaseController {
         if (!Objects.isNull(id)) {
             customerDetailService.deleteCustomer(id);
         }
-        return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
+        return new ResultModel(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg());
     }
 
     /**
@@ -120,6 +121,6 @@ public class CustomerController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResultModel("0", ResultStatus.SUCCESS.getMsg(), "");
+        return new ResultModel(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg());
     }
 }

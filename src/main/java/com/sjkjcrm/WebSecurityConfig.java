@@ -43,7 +43,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //        super.addInterceptors(registry);
 
 //        addInterceptor.addPathPatterns("/**").excludePathPatterns("/validate/**", "/static/**", "/error", "/css/**", "/customer/**");
-        addInterceptor.addPathPatterns("/**").excludePathPatterns("/validate/**", "/static/**", "/error", "/css/**", "/js/**", "/images/**", "/customer/**");
+        addInterceptor.addPathPatterns("/**").excludePathPatterns("/validate/**", "/static/**", "/error", "/css/**", "/js/**", "/images/**");
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {

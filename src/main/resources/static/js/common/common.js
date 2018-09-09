@@ -11,9 +11,8 @@ var Common = function () {
             //     limits: [10, 20, 50, 100]
             // },
             request: {
-                pageName: 'current',
-                limitName: 'size',
-                size: 'size'
+                pageName: 'page',
+                limitName: 'limit'
             },
             done: function (res, curr, count) {
                 console.log(res);

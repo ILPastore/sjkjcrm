@@ -21,7 +21,7 @@ public class LoginController extends BaseController {
 
     @PostMapping("/loginPost")
     @ResponseBody
-    public Map<String, Object> loginPost(String account, String password, HttpSession session) {
+    public Map<String, Object> loginPost(String username, String password, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         if (!"123456".equals(password)) {
             map.put("success", false);
@@ -30,7 +30,7 @@ public class LoginController extends BaseController {
         }
 
         // 设置session
-        session.setAttribute(WebSecurityConfig.SESSION_KEY, account);
+        session.setAttribute(WebSecurityConfig.SESSION_KEY, username);
 
         map.put("success", true);
         map.put("message", "登录成功");
@@ -44,5 +44,4 @@ public class LoginController extends BaseController {
         session.removeAttribute(WebSecurityConfig.SESSION_KEY);
         return "redirect:/login";
     }
-
 }
