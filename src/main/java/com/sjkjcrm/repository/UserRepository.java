@@ -12,10 +12,10 @@ public interface UserRepository extends BaseRepository<User,Long>{
 
     /**
      * 按名称查询
-     * @param userName
+     * @param userCode
      * @return
      */
-    User findByUserName(String userName);
+    User findByUserCode(String userCode);
 }
 
 
