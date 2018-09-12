@@ -40,7 +40,7 @@
                          style="height: 46px;padding: 0 5px"/>
                 </div>-->
                 <div style="color: white;font-size: 14px;display: none;text-align: center" id="errorMsg">*这是错误信息</div>
-                <div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
+                <div class="mb2"><a class="act-but submit"  style="color: #FFFFFF">登录</a></div>
             </div>
         </div>
     </div>
@@ -53,32 +53,23 @@
 <script>
     $(function () {
         $(".mb2").on('click', function () {
+            console.log("in");
             $.ajax({
-                url: '/validate/loginPost',
+                url: '/login',
                 method: 'POST',
                 data: {
                     username: $('input[name=username]').val(),
                     password: $('input[name=password]').val()
-                    // kaptcha:$('input[name=kaptcha]').val()
                 },
                 dataType: 'json',
-                success: function (res) {
-                    console.log(res);
-                    if (res.code === '0') {
-                        $("#errorMsg").hide();
-                        location.href = '/customer/homepage';
-                    } else {
-                        $("#errorMsg").html('*' + res.msg);
-                        $("#errorMsg").show();
-                        // $("#kaptchaImg").click();
+                success: function (data) {
+                    console.log(data)
+                    if(data.status==200){
+                        location.href = "customer/home.html";
                     }
                 }
             });
         })
-
-        // $("#kaptchaImg").on('click',function () {
-        //     $(this).attr("src", "/kaptcha.jpg?tm=" + Math.random());
-        // })
     });
 </script>
 </body>
