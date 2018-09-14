@@ -53,9 +53,8 @@
 <script>
     $(function () {
         $(".mb2").on('click', function () {
-            console.log("in");
             $.ajax({
-                url: '/login',
+                url: '/loginUser',
                 method: 'POST',
                 data: {
                     username: $('input[name=username]').val(),
@@ -65,7 +64,7 @@
                 success: function (data) {
                     console.log(data)
                     if(data.status==200){
-                        location.href = "customer/home.html";
+                        window.location.href = "customer/home.html";
                     }
                 }
             });

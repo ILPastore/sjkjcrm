@@ -1,6 +1,7 @@
 package com.sjkjcrm.controller.login;
 
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.sjkjcrm.bean.permisson.Role;
 import com.sjkjcrm.bean.permisson.User;
 import com.sjkjcrm.service.ILoginService;
@@ -35,20 +36,19 @@ public class LoginController extends BaseController {
     }
 
     //退出的时候是get请求，主要是用于退出
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @RequestMapping(value = "/login")
     public String login(){
         return "login";
     }
 
     //post登录
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/loginUser",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(@RequestBody(required = false) Map map){
+    public Map<String,Object> login(@RequestParam Map map){
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
         Map<String,Object> resultMap = new HashMap<>();
         try {
-
             UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
                     map.get("username").toString(),
                     map.get("password").toString());
@@ -57,23 +57,14 @@ public class LoginController extends BaseController {
             resultMap.put("status", 200);
             resultMap.put("message", "登录成功");
         } catch (UnknownAccountException e) {
-
             resultMap.put("status", 500);
-
             resultMap.put("message", "账号不存在！");
-
         }catch(IncorrectCredentialsException e1){
-
             resultMap.put("status", 500);
-
             resultMap.put("message", "密码错误！");
-
         }catch (Exception e) {
-
             resultMap.put("status", 500);
-
             resultMap.put("message", "账号不存在");
-
         }
         return resultMap;
     }
@@ -97,10 +88,14 @@ public class LoginController extends BaseController {
         return "customer/home";
     }
 
-    //登出
     @RequestMapping(value = "/logout")
+    @ResponseBody
     public String logout(){
-        return "logout";
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", true);
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.logout();
+        return JSONUtils.toJSONString(result);
     }
 
     //错误页面展示
