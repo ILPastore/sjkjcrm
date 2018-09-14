@@ -1,6 +1,7 @@
 package com.sjkjcrm.service;
 
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.sjkjcrm.bean.permisson.Permission;
 import com.sjkjcrm.bean.permisson.Role;
 import com.sjkjcrm.bean.permisson.User;
@@ -14,10 +15,12 @@ import java.util.Map;
 public interface ILoginService {
     /**
      * 添加用户
-     * @param map
+     * @param user
      * @return
      */
-    User addUser(Map<String, Object> map);
+    User addUser(User user);
+
+    List<User> queryList(Page page);
 
     /**
      * 添加角色
