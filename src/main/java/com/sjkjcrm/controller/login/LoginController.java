@@ -30,12 +30,6 @@ public class LoginController extends BaseController {
 
 
     //退出的时候是get请求，主要是用于退出
-    @RequestMapping(value = "/*.html",method = RequestMethod.GET)
-    public String all(HttpServletRequest request){
-        return request.getRequestURI().substring(0,request.getRequestURI().length()-5);
-    }
-
-    //退出的时候是get请求，主要是用于退出
     @RequestMapping(value = "/login")
     public String login(){
         return "login";
@@ -104,12 +98,6 @@ public class LoginController extends BaseController {
         return "error ok!";
     }
 
-    //数据初始化
-    @RequestMapping(value = "/addUser",method = RequestMethod.POST)
-    public String addUser(@RequestBody Map<String,Object> map){
-        User user = loginService.addUser(map);
-        return "addUser is ok! \n" + user;
-    }
 
     //角色初始化
     @RequestMapping(value = "/addRole")
