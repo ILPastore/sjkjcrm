@@ -38,7 +38,10 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String,String> map = new HashMap<String, String>();
         //对所有用户认证
+        map.put("/logout","logout");
         map.put("/**","authc");
+        map.put("/loginUser", "anon");
+        map.put("/login.html", "anon");
         map.put("/getGifCode", "anon");
         map.put("/ajaxLogin", "anon");
         map.put("/assets/**", "anon");
@@ -48,9 +51,9 @@ public class ShiroConfiguration {
         map.put("/js/**", "anon");
         //登录
         shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setSuccessUrl("/index");
         //错误页面，认证不通过跳转
-        shiroFilterFactoryBean.setSuccessUrl("/unauth");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/login");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }
