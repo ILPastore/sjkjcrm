@@ -44,6 +44,11 @@ public class CustomerController extends BaseController {
     public String customerPage() {
         return "customer/list";
     }
+
+    @RequestMapping("/customerpage1")
+    public String customerPage1() {
+        return "permission/list";
+    }
 //
 //    @RequestMapping("/welcome")
 //    public String welcome() {
