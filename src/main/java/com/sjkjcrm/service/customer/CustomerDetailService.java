@@ -33,4 +33,11 @@ public interface CustomerDetailService {
      * @param file
      */
     void importExcel(String fileName, MultipartFile file);
+
+    /**
+     * 根据ID查询客户信息
+     * @param id
+     * @return
+     */
+    public CustomerDetail selectCustomerDetailById(String id);
 }

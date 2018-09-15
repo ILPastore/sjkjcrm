@@ -35,32 +35,42 @@ public class CustomerController extends BaseController {
         return new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailList.size() + "", customerDetailList);
     }
 
-//    @RequestMapping("/homepage")
-//    public String homepage() {
-//        return "customer/home";
-//    }
+    @RequestMapping("/homepage")
+    public String homepage() {
+        return "customer/home";
+    }
 
     @RequestMapping("/customerpage")
     public String customerPage() {
         return "customer/list";
     }
-//
-//    @RequestMapping("/welcome")
-//    public String welcome() {
-//        return "welcome";
-//    }
 
-//    /**
-//     * 新增客户
-//     * @param id
-//     * @param model
-//     * @return
-//     */
+    @RequestMapping("/customerpage1")
+    public String customerPage1() {
+        return "permission/list";
+    }
+
+    @RequestMapping("/welcome")
+    public String welcome() {
+        return "welcome";
+    }
+
+    @GetMapping("/addcustomer")
+    public String addCustomer() {
+        return "customer/edit";
+    }
+
+    /**
+     * 修改客户信息·
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/editCustomer")
     public String editCustomer(@RequestParam(name = "id", required = false) String id, Model model) {
         System.out.println("id=====" + id);
-
-
+        CustomerDetail customerDetail = customerDetailService.selectCustomerDetailById(id);
+        model.addAttribute("customerDetail", customerDetail);
         return "customer/edit";
     }
 

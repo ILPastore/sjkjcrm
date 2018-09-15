@@ -80,6 +80,16 @@
         <i class="layui-icon">&#xe640;</i>
     </button>
 </script>
+<script type="text/html" id="type">
+    {{#if(d.type==0){}}
+    <span>意向客户</span>
+    {{#} else if(d.type==2){}}
+    <span>签单客户</span>
+    {{#} else {}}
+    <span>公海客户</span>
+    {{#}}}
+</script>
+
 <script th:inline="javascript">
     layui.use(['upload', 'table', 'laypage'], function () {
         var cols = [[
@@ -90,7 +100,7 @@
             , {field: 'corpTel', title: '公司电话'}
             , {field: 'mail', title: '邮箱'}
             , {field: 'address', title: '通讯地址'}
-            , {field: 'type', title: '客户类型'}
+            , {field: 'type', title: '客户类型', templet:'#type'}
             , {field: 'corpGrade', title: '客户级别'}
             , {field: 'visitDate', title: '回访日期'}
             , {field: 'linkman', title: '联系人'}

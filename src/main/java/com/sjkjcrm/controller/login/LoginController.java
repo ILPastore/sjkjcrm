@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,12 +31,6 @@ public class LoginController extends BaseController {
 
 
     //退出的时候是get请求，主要是用于退出
-    @RequestMapping(value = "/*.html",method = RequestMethod.GET)
-    public String all(HttpServletRequest request){
-        return request.getRequestURI().substring(0,request.getRequestURI().length()-5);
-    }
-
-    //退出的时候是get请求，主要是用于退出
     @RequestMapping(value = "/login")
     public String login(){
         return "login";
@@ -44,7 +39,7 @@ public class LoginController extends BaseController {
     //post登录
     @RequestMapping(value = "/loginUser",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(@RequestParam Map map){
+    public Map<String,Object> login(@RequestParam Map map, HttpSession session){
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
         Map<String,Object> resultMap = new HashMap<>();
@@ -56,6 +51,8 @@ public class LoginController extends BaseController {
             subject.login(usernamePasswordToken);
             resultMap.put("status", 200);
             resultMap.put("message", "登录成功");
+
+            session.setAttribute("user", map.get("username"));
         } catch (UnknownAccountException e) {
             resultMap.put("status", 500);
             resultMap.put("message", "账号不存在！");
@@ -104,12 +101,6 @@ public class LoginController extends BaseController {
         return "error ok!";
     }
 
-    //数据初始化
-    @RequestMapping(value = "/addUser",method = RequestMethod.POST)
-    public String addUser(@RequestBody Map<String,Object> map){
-        User user = loginService.addUser(map);
-        return "addUser is ok! \n" + user;
-    }
 
     //角色初始化
     @RequestMapping(value = "/addRole")

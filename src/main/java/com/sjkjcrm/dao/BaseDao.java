@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -56,8 +57,13 @@ public class BaseDao<T> extends JdbcDaoSupport {
         return row.get(0);
     }
 
+    @SuppressWarnings("unchecked")
     public List<T> queryList(String sql, Object[] args, Class<?> cls) {
         return getWrapTemplate().query(sql, args, new BeanPropertyRowMapper(cls));
+    }
+
+    public Object queryObject(String sql, Object[] args, Class<?> cls) {
+        return getWrapTemplate().queryForObject(sql, args, new BeanPropertyRowMapper(cls));
     }
 
     public List<Map<String, Object>> queryForList(String sql) {

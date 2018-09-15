@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -22,6 +23,9 @@ public class CustomerDetailDao {
 
     @Resource
     private BaseDao baseDao;
+
+    @Autowired
+    private HttpSession session;
 
     /**
      * 根据条件查询客户信息
@@ -52,6 +56,11 @@ public class CustomerDetailDao {
             conditionValues.add(paraConditions.get("type"));
         }
 
+        if (session.getAttribute("user") != null) {
+            sql.append("and salesperson = ?");
+            conditionValues.add(session.getAttribute("user"));
+        }
+
         return baseDao.queryList(sql.toString(), conditionValues.toArray(), CustomerDetail.class);
     }
 
@@ -79,7 +88,17 @@ public class CustomerDetailDao {
      * @return
      */
     public int[] batchInsertCustomer(BatchPreparedStatementSetter batchPreparedStatementSetter) {
-        String sql = "insert into customer_detail(customer_id, name, number, type, phone, corp_tel, mail, address, corp_type, corp_grade, visit_date, linkman) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into customer_detail(customer_id, name, number, type, phone, corp_tel, mail, address, corp_type, corp_grade, visit_date, linkman, salesperson) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return baseDao.executeBatch(sql, batchPreparedStatementSetter);
+    }
+
+    /**
+     * 根据id查询客户信息
+     * @param id
+     * @return
+     */
+    public CustomerDetail selectCustomerDetailById(String id) {
+        String sql = "select * from customer_detail where customer_id = ?";
+        return (CustomerDetail) baseDao.queryObject(sql, new Object[]{id}, CustomerDetail.class);
     }
 }

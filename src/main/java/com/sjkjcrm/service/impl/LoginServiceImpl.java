@@ -1,12 +1,14 @@
 package com.sjkjcrm.service.impl;
 
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.sjkjcrm.bean.permisson.Permission;
 import com.sjkjcrm.bean.permisson.Role;
 import com.sjkjcrm.bean.permisson.User;
 import com.sjkjcrm.repository.RoleRepository;
 import com.sjkjcrm.repository.UserRepository;
 import com.sjkjcrm.service.ILoginService;
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +34,14 @@ public class LoginServiceImpl implements ILoginService {
 
     //添加用户
     @Override
-    public User addUser(Map<String, Object> map) {
-        User user = new User();
-//        user.setName(map.get("username").toString());
-//        user.setPassword(Integer.valueOf(map.get("password").toString()));
-//        userRepository.save(user);
+    public User addUser(User user) {
+        userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public List<User> queryList(Page page) {
+        return IterableUtils.toList(userRepository.findAll());
     }
 
     //添加角色
