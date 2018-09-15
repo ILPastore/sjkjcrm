@@ -23,12 +23,12 @@
                 <div class="input_outer">
                     <span class="u_user"></span>
                     <input name="username" class="text" style="color: #FFFFFF !important" type="text"
-                           placeholder="请输入账户" th:value="superadmin">
+                           placeholder="请输入账户">
                 </div>
                 <div class="input_outer">
                     <span class="us_uer"></span>
                     <input name="password" class="text"
-                           style="color: #FFFFFF !important; position:absolute; z-index:100;" value="123456"
+                           style="color: #FFFFFF !important; position:absolute; z-index:100;"
                            type="password" placeholder="请输入密码">
                 </div>
                 <!--<div style="display: flex">
@@ -49,6 +49,7 @@
 <script th:src="@{/js/common/login/EasePack.min.js}"></script>
 <script th:src="@{/js/common/login/rAF.js}"></script>
 <script th:src="@{/js/common/login/login.js}"></script>
+<script th:src="@{/js/layui/layui.all.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery/jquery-3.3.1.min.js}"></script>
 <script>
     $(function () {
@@ -64,7 +65,9 @@
                 success: function (data) {
                     console.log(data)
                     if(data.status==200){
-                        window.location.href = "customer/home.html";
+                        window.location.href = "customer/homepage";
+                    }else if (data.status == 500) {
+                        layer.msg(data.message);
                     }
                 }
             });

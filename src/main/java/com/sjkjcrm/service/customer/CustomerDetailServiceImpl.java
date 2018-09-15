@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,6 +19,9 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
 
     @Autowired
     private CustomerDetailDao customerDetailDao;
+
+    @Autowired
+    private HttpSession session;
 
     @Override
     public List<CustomerDetail> getCustomerByCondition(Page<CustomerDetail> page) {
@@ -36,8 +40,6 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
 
     @Override
     public void importExcel(String fileName, MultipartFile file) {
-//        String filePath = "D:\\customertemplate.xls";
-        // 解析excel，
         try {
             List<CustomerDetail> customerDetailList = ExcelUtils.importExcel(file, 1, 1, CustomerDetail.class);
             System.out.println("导入数据一共【" + customerDetailList.size() + "】行");
@@ -56,6 +58,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
                     preparedStatement.setString(9, customerDetail.getCorpGrade());
                     preparedStatement.setString(10, customerDetail.getVisitDate());
                     preparedStatement.setString(11, customerDetail.getLinkman());
+                    preparedStatement.setString(12, session.getAttribute("user").toString());
                 }
 
                 @Override
@@ -67,5 +70,10 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public CustomerDetail selectCustomerDetailById(String id) {
+        return customerDetailDao.selectCustomerDetailById(id);
     }
 }

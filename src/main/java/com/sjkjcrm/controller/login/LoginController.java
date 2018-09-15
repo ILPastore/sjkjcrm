@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class LoginController extends BaseController {
     //post登录
     @RequestMapping(value = "/loginUser",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(@RequestParam Map map){
+    public Map<String,Object> login(@RequestParam Map map, HttpSession session){
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
         Map<String,Object> resultMap = new HashMap<>();
@@ -50,6 +51,8 @@ public class LoginController extends BaseController {
             subject.login(usernamePasswordToken);
             resultMap.put("status", 200);
             resultMap.put("message", "登录成功");
+
+            session.setAttribute("user", map.get("username"));
         } catch (UnknownAccountException e) {
             resultMap.put("status", 500);
             resultMap.put("message", "账号不存在！");
