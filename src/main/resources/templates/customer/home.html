@@ -48,7 +48,7 @@
                         <dd><a href="javascript:;" lay-id="memu_1" text="客户信息"
                                data-url="/customer/customerpage">客户信息</a>
                         </dd>
-                        <dd><a href="javascript:;">意向客户</a></dd>
+                        <dd><a>意向客户</a></dd>
                         <dd><a href="javascript:;">签单客户</a></dd>
                         <dd><a href="javascript:;">公海客户</a></dd>
                     </dl>
@@ -67,7 +67,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">权限管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" lay-id="memu_1" text="用户管理"
+                        <dd><a href="javascript:;" lay-id="memu_11" text="用户管理"
                                data-url="/user/list.html">用户管理</a></dd>
                     </dl>
                 </li>
@@ -115,19 +115,23 @@
             var url = (elem.context.firstChild.dataset)["url"];
             var id = $(elem.context.firstChild).attr("lay-id");
             element.tabDelete('mainTab', id);
-            element.tabAdd('mainTab', {
-                title: elem.text(),
-                content: '<iframe src="' + url + '" width="100%" height="' + height + 'px" style="border: none" name="mainFrame" id="' + id + '"></iframe>', //支持传入html
-                id: id
-            });
+            if (url == null || id == null) {
+                element.tabAdd('mainTab', {
+                    title: elem.text(),
+                    // content: 'tips/prompt.html',
+                    content: '<iframe src="../tips/prompt.html" width="100%" height= "' + height + 'px" style="border: none" name="mainFrame"></iframe>',
+                    id: id
+                });
+            } else {
+                element.tabAdd('mainTab', {
+                    title: elem.text(),
+                    content: '<iframe src="' + url + '" width="100%" height="' + height + 'px" style="border: none" name="mainFrame" id="' + id + '"></iframe>', //支持传入html
+                    id: id
+                });
+            }
             element.tabChange('mainTab', id);
         });
     });
-
-    // $(function () {
-    //     var username = '<%= session.getAttribute("username")%>';
-    //     console.log("username:::" + username);
-    // })
 </script>
 </body>
 </html>

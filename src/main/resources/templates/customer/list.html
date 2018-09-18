@@ -116,7 +116,7 @@
                 layer.confirm('真的删除行么', function (index) {
                     Common.ajaxFormSubmit('/customer/deleteCustomer', {id: data.customerId}, function (data) {
                         layer.close(index);
-                        layer.msg(data.msg, {icon: 6}, function () {
+                        layer.msg(data.msg, {icon: 6, time: 100}, function () {
                             $('#searchBtn').click();
                         });
                     });
@@ -132,8 +132,7 @@
 
         upload.render({
             elem: '#importBtn'
-            , url:
-                + '/customer/importExcel'
+            , url: basePath + '/customer/importExcel'
             , accept: 'file'
             , multiple: true
             , before: function (obj) {

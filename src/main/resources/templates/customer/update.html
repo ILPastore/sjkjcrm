@@ -10,10 +10,17 @@
 </head>
 <body class="form-body">
 <form class="layui-form ">
+    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
+        <label class="layui-form-label">客户ID</label>
+        <div class="layui-input-inline">
+            <input type="text" name="customerId" lay-verify="required|number" lay-verType="tips" readonly="true"
+                   th:value="${customerDetail.customerId}" autocomplete="off" class="layui-input">
+        </div>
+    </div>
     <div class="layui-form-item layui-col-md6 layui-col-md-offset2">
         <label class="layui-form-label">客户名称</label>
         <div class="layui-input-inline form-length350">
-            <input type="text" name="name" lay-verify="required"
+            <input type="text" name="name" lay-verify="required" readonly="true"
                    th:value="${customerDetail.name}" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-form-mid layui-word-aux">*6-12个字符</div>
@@ -21,35 +28,37 @@
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">客户编号</label>
         <div class="layui-input-inline">
-            <input type="text" name="number" lay-verify="required|number" lay-verType="tips"
-                   placeholder="请输入客户编号" autocomplete="off" class="layui-input">
+            <input type="text" name="number" lay-verify="required|number" lay-verType="tips" readonly="true"
+                   th:value="${customerDetail.number}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">联系电话</label>
         <div class="layui-input-inline">
-            <input type="text" name="phone" lay-verify="required|phone" placeholder="请输入联系电话"
+            <input type="text" name="phone" lay-verify="required|phone" th:value="${customerDetail.phone}"
+                   readonly="true"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">公司电话</label>
         <div class="layui-input-inline">
-            <input type="text" name="corpTel" lay-verify="required|number" placeholder="请输入公司电话"
+            <input type="text" name="corpTel" lay-verify="required|number" th:value="${customerDetail.corpTel}"
+                   readonly="true"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">邮箱</label>
         <div class="layui-input-inline">
-            <input type="text" name="mail" lay-verify="required" placeholder="请输入邮箱"
+            <input type="text" name="mail" lay-verify="required" th:value="${customerDetail.mail}" readonly="true"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">通讯地址</label>
         <div class="layui-input-inline">
-            <input type="text" name="address" lay-verify="required" placeholder="请输入通讯地址"
+            <input type="text" name="address" lay-verify="required" th:value="${customerDetail.address}" readonly="true"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
@@ -67,7 +76,8 @@
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">客户级别</label>
         <div class="layui-input-inline">
-            <input type="text" name="corpGrade" lay-verify="required" placeholder="请输入客户级别"
+            <input type="text" name="corpGrade" lay-verify="required" th:value="${customerDetail.corpGrade}"
+                   readonly="true"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
@@ -75,7 +85,7 @@
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">联系人</label>
         <div class="layui-input-inline">
-            <input type="text" name="linkman" lay-verify="required" placeholder="请输入联系人"
+            <input type="text" name="linkman" lay-verify="required" th:value="${customerDetail.linkman}" readonly="true"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
@@ -83,7 +93,8 @@
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">回访日期</label>
         <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
-            <input type="text" class="layui-input" name="visitDate" id="visitDate">
+            <input type="text" class="layui-input" name="visitDate" id="visitDate"
+                   th:value="${customerDetail.visitDate}">
         </div>
     </div>
 
@@ -101,7 +112,7 @@
       </div>-->
     <div class="layui-form-item layui-col-md-offset5">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="add" type="button">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="update" type="button">立即更新</button>
             <button id="closeBtn" type="button" class="layui-btn layui-btn-primary">取消</button>
         </div>
     </div>
@@ -116,8 +127,8 @@
         // }, {category: 'photo'});
 
         // 监听提交
-        form.on('submit(add)', function (data) {
-            Common.ajaxFormSubmit('/customer/insert', data.field, function (data) {
+        form.on('submit(update)', function (data) {
+            Common.ajaxFormSubmit('/customer/update', data.field, function (data) {
                 layer.msg(data.msg, {icon: 6}, function () {
                     Common.closeFrame();
                 });
@@ -134,6 +145,8 @@
         laydate.render({
             elem: '#visitDate'
         });
+
+        // $("#class option[value='1']").attr('selected', true);
 
         form.render();
     });

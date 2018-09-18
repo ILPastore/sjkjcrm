@@ -51,4 +51,10 @@ public interface ILoginService {
      * @return
      */
     List<Permission> findPermissionsByUserCode(String userCode);
+
+    /**
+     * 删除用户信息
+     * @param user
+     */
+    void delUser(User user);
 }

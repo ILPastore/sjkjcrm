@@ -40,4 +40,10 @@ public interface CustomerDetailService {
      * @return
      */
     public CustomerDetail selectCustomerDetailById(String id);
+
+    /**
+     * 更新客户信息
+     * @param customerDetail
+     */
+    void updateCustomer(CustomerDetail customerDetail);
 }

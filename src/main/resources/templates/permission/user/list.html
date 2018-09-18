@@ -47,10 +47,10 @@
                 Common.openFrame('/sys/user/detail?id=' + data.id, '用户信息', '800px', '500px');
             } else if (layEvent === 'del') { // 删除
                 layer.confirm('真的删除行么', function (index) {
-                    Common.ajaxFormSubmit('/customer/deleteCustomer', {id: data.customerId}, function (data) {
+                    Common.ajaxFormSubmit('/user/del', {id: data.id}, function (data) {
                         layer.close(index);
-                        layer.msg(data.msg, {icon: 6}, function () {
-                            $('#searchBtn').click();
+                        layer.msg(data.msg, {icon: 6, time:100}, function () {
+                            Common.searchTable('searchForm', initTable);
                         });
                     });
                 });
@@ -66,7 +66,7 @@
 
         $("#addBtn").on('click', function () {
             Common.openFrame('/user/edit.html', '添加用户信息', '600px', '500px', function () {
-                $('#searchBtn').click();
+                Common.searchTable('searchForm', initTable);
             });
         });
 

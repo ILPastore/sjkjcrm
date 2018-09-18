@@ -30,6 +30,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
 
     @Override
     public int insertCustomer(CustomerDetail customerDetail) {
+        customerDetail.setSalesperson(session.getAttribute("user").toString());
         return customerDetailDao.insertCustomer(customerDetail);
     }
 
@@ -75,5 +76,10 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     @Override
     public CustomerDetail selectCustomerDetailById(String id) {
         return customerDetailDao.selectCustomerDetailById(id);
+    }
+
+    @Override
+    public void updateCustomer(CustomerDetail customerDetail) {
+        customerDetailDao.updateCustomer(customerDetail);
     }
 }

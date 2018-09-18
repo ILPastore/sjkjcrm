@@ -69,8 +69,8 @@ public class CustomerDetailDao {
      * @param customerDetail
      */
     public int insertCustomer(CustomerDetail customerDetail) {
-        String sql = "insert into customer_detail(customer_id, name, number, type, phone, corp_tel, mail, address, corp_type, corp_grade, visit_date, linkman) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        return 1; //this.baseDao.update(sql, new Object[] {customerDetail.getName(), customerDetail.getNumber(), customerDetail.getType(), customerDetail.getPhone(), customerDetail.getCorpTel(), customerDetail.getMail(), customerDetail.getAddress(), customerDetail.getCorpType(), customerDetail.getCorpGrade(), customerDetail.getVisitDate(), customerDetail.getLinkman()});
+        String sql = "insert into customer_detail(customer_id, name, number, type, phone, corp_tel, mail, address, corp_type, corp_grade, visit_date, linkman, salesperson) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return this.baseDao.update(sql, new Object[] {customerDetail.getName(), customerDetail.getNumber(), customerDetail.getType(), customerDetail.getPhone(), customerDetail.getCorpTel(), customerDetail.getMail(), customerDetail.getAddress(), customerDetail.getCorpType(), customerDetail.getCorpGrade(), customerDetail.getVisitDate(), customerDetail.getLinkman(), customerDetail.getSalesperson()});
     }
 
     /**
@@ -100,5 +100,10 @@ public class CustomerDetailDao {
     public CustomerDetail selectCustomerDetailById(String id) {
         String sql = "select * from customer_detail where customer_id = ?";
         return (CustomerDetail) baseDao.queryObject(sql, new Object[]{id}, CustomerDetail.class);
+    }
+
+    public void updateCustomer(CustomerDetail customerDetail) {
+        String sql = "update customer_detail set type = ?, visit_date = ? where customer_id = ?";
+        baseDao.update(sql, new Object[] {customerDetail.getType(), customerDetail.getVisitDate(), customerDetail.getCustomerId()});
     }
 }

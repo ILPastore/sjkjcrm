@@ -79,4 +79,9 @@ public class LoginServiceImpl implements ILoginService {
     public List<Permission> findPermissionsByUserCode(String userCode) {
         return null;
     }
+
+    @Override
+    public void delUser(User user) {
+        userRepository.delete(user);
+    }
 }

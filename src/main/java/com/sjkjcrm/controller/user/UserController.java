@@ -53,4 +53,15 @@ public class UserController extends BaseController {
 //        customerDetailService.insertCustomer(customerDetail);
        return new ResultModel(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg());
     }
+
+    /**
+     * 删除用户信息
+     * @return
+     */
+    @RequestMapping("/del")
+    @ResponseBody
+    public ResultModel delCustomer(User user) {
+        loginService.delUser(user);
+        return new ResultModel(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg());
+    }
 }

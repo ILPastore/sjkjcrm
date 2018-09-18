@@ -12,7 +12,7 @@ create table customer_detail(
     address varchar(50) comment '通信地址',
     corp_type varchar(30) comment '公司类型',
     corp_grade varchar(30) comment '公司级别',
-    visit_date datetime comment '回访日期',
+    visit_date varchar(10) comment '回访日期',
     linkman varchar(10) comment '联系人',
     salesperson varchar(10) comment '销售员',
     create_time timestamp default CURRENT_TIMESTAMP commont '创建时间',

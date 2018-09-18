@@ -71,7 +71,7 @@ public class CustomerController extends BaseController {
         System.out.println("id=====" + id);
         CustomerDetail customerDetail = customerDetailService.selectCustomerDetailById(id);
         model.addAttribute("customerDetail", customerDetail);
-        return "customer/edit";
+        return "customer/update";
     }
 
     /**
@@ -82,6 +82,17 @@ public class CustomerController extends BaseController {
     @ResponseBody
     public ResultModel insertCustomer(CustomerDetail customerDetail) {
         customerDetailService.insertCustomer(customerDetail);
+        return new ResultModel(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg());
+    }
+
+    /**
+     * 更新客户信息
+     * @return
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public ResultModel updateCustomer(CustomerDetail customerDetail) {
+        customerDetailService.updateCustomer(customerDetail);
         return new ResultModel(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg());
     }
 
