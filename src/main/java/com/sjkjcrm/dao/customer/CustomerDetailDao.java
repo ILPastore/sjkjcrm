@@ -36,28 +36,28 @@ public class CustomerDetailDao {
         List<Object> conditionValues = new ArrayList<>();
         StringBuilder sql = new StringBuilder("select * from customer_detail where 1 = 1 ");
 
-        if (!Objects.isNull(paraConditions) && paraConditions.get("name") != null) {
-            sql.append("and name like ? ");
-            conditionValues.add("%" + paraConditions.get("name") + "%");
+        if (!Objects.isNull(paraConditions) && paraConditions.get("corpName") != null) {
+            sql.append("and corp_name like ? ");
+            conditionValues.add("%" + paraConditions.get("corpName") + "%");
         }
 
-        if (!Objects.isNull(paraConditions) && paraConditions.get("linkman") != null) {
-            sql.append("and linkman like ? ");
-            conditionValues.add("%" + paraConditions.get("linkman") + "%");
+        if (!Objects.isNull(paraConditions) && paraConditions.get("legalPerson") != null) {
+            sql.append("and legal_person like ? ");
+            conditionValues.add("%" + paraConditions.get("legalPerson") + "%");
         }
 
-        if (!Objects.isNull(paraConditions) && paraConditions.get("phone") != null) {
-            sql.append("and phone like ? ");
-            conditionValues.add(paraConditions.get("phone") + "%");
+        if (!Objects.isNull(paraConditions) && paraConditions.get("corpTel") != null) {
+            sql.append("and corp_tel like ? ");
+            conditionValues.add(paraConditions.get("corpTel") + "%");
         }
 
-        if (!Objects.isNull(paraConditions) && paraConditions.get("type") != null) {
-            sql.append("and type = ? ");
-            conditionValues.add(paraConditions.get("type"));
+        if (!Objects.isNull(paraConditions) && paraConditions.get("customerStatus") != null) {
+            sql.append("and customer_status = ? ");
+            conditionValues.add(paraConditions.get("customerStatus"));
         }
 
         if (session.getAttribute("user") != null) {
-            sql.append("and salesperson = ?");
+            sql.append("and loginuser = ?");
             conditionValues.add(session.getAttribute("user"));
         }
 
@@ -69,8 +69,8 @@ public class CustomerDetailDao {
      * @param customerDetail
      */
     public int insertCustomer(CustomerDetail customerDetail) {
-        String sql = "insert into customer_detail(customer_id, name, number, type, phone, corp_tel, mail, address, corp_type, corp_grade, visit_date, linkman, salesperson) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        return this.baseDao.update(sql, new Object[] {customerDetail.getName(), customerDetail.getNumber(), customerDetail.getType(), customerDetail.getPhone(), customerDetail.getCorpTel(), customerDetail.getMail(), customerDetail.getAddress(), customerDetail.getCorpType(), customerDetail.getCorpGrade(), customerDetail.getVisitDate(), customerDetail.getLinkman(), customerDetail.getSalesperson()});
+        String sql = "insert into customer_detail(customer_id, corp_name, legal_person, corp_tel, other_linkman, linkman_phone, address, registration_time, registration_capital, weburl, customer_status, visit_date, remarks, loginuser) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return this.baseDao.update(sql, new Object[] {customerDetail.getCorpName(), customerDetail.getLegalPerson(), customerDetail.getCorpTel(), customerDetail.getOtherLinkman(), customerDetail.getLinkmanPhone(), customerDetail.getAddress(), customerDetail.getRegistrationTime(), customerDetail.getRegistrationCapital(), customerDetail.getWebUrl(), customerDetail.getCustomerStatus(), customerDetail.getVisitDate(), customerDetail.getRemarks(), customerDetail.getLoginUser()});
     }
 
     /**
@@ -88,7 +88,7 @@ public class CustomerDetailDao {
      * @return
      */
     public int[] batchInsertCustomer(BatchPreparedStatementSetter batchPreparedStatementSetter) {
-        String sql = "insert into customer_detail(customer_id, name, number, type, phone, corp_tel, mail, address, corp_type, corp_grade, visit_date, linkman, salesperson) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into customer_detail(customer_id, corp_name, legal_person, corp_tel, other_linkman, linkman_phone, address, registration_time, registration_capital, weburl, customer_status, visit_date, remarks, loginuser) values(UUID_SHORT(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return baseDao.executeBatch(sql, batchPreparedStatementSetter);
     }
 
@@ -103,7 +103,7 @@ public class CustomerDetailDao {
     }
 
     public void updateCustomer(CustomerDetail customerDetail) {
-        String sql = "update customer_detail set type = ?, visit_date = ? where customer_id = ?";
-        baseDao.update(sql, new Object[] {customerDetail.getType(), customerDetail.getVisitDate(), customerDetail.getCustomerId()});
+        String sql = "update customer_detail set corp_name = ?, legal_person = ?, corp_tel = ?, other_linkman = ?, linkman_phone = ?, address = ?, registration_time = ?, registration_capital = ?, weburl = ?, customer_status = ?, visit_date = ?, remarks = ? where customer_id = ?";
+        baseDao.update(sql, new Object[] {customerDetail.getCorpName(), customerDetail.getLegalPerson(), customerDetail.getCorpTel(), customerDetail.getOtherLinkman(), customerDetail.getLinkmanPhone(), customerDetail.getAddress(), customerDetail.getRegistrationTime(), customerDetail.getRegistrationCapital(), customerDetail.getWebUrl(), customerDetail.getCustomerStatus(), customerDetail.getVisitDate(), customerDetail.getRemarks(), customerDetail.getCustomerId()});
     }
 }

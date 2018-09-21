@@ -12,31 +12,33 @@
     <form class="layui-form" style="text-align: left" id="searchForm">
         <div class="layui-form-item"> <!--layui-col-md6 layui-col-md-->
             <div class="layui-inline">
-                <label class="layui-form-label">客户名称</label>
+                <label class="layui-form-label">企业名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="name" autocomplete="off" class="layui-input">
+                    <input type="text" name="corpName" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">联系人</label>
+                <label class="layui-form-label">法人</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="linkman" autocomplete="off" class="layui-input">
+                    <input type="text" name="legalPerson" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">电话</label>
+                <label class="layui-form-label">联系电话</label>
                 <div class="layui-input-inline">
-                    <input type="tel" name="phone" autocomplete="off" class="layui-input">
+                    <input type="tel" name="corpTel" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">客户类型</label>
+                <label class="layui-form-label">客户状态</label>
                 <div class="layui-input-inline">
-                    <select name="type" lay-verify="required" lay-search="">
+                    <select name="customerStatus" lay-search="">
                         <option value="">请选择</option>
                         <option value="0">意向客户</option>
-                        <option value="1">签单客户</option>
+                        <option value="1">重点客户</option>
                         <option value="2">公海客户</option>
+                        <option value="3">合作客户</option>
+                        <option value="4">保护客户</option>
                     </select>
                 </div>
             </div>
@@ -80,13 +82,19 @@
         <i class="layui-icon">&#xe640;</i>
     </button>
 </script>
-<script type="text/html" id="type">
-    {{#if(d.type==0){}}
+<script type="text/html" id="customerStatus">
+    {{#if(d.customerStatus==0){}}
     <span>意向客户</span>
-    {{#} else if(d.type==2){}}
-    <span>签单客户</span>
-    {{#} else {}}
+    {{#} else if(d.customerStatus==1){}}
+    <span>重点客户</span>
+    {{#} else if(d.customerStatus==2){}}
     <span>公海客户</span>
+    {{#} else if(d.customerStatus==3){}}
+    <span>合作客户</span>
+    {{#} else if(d.customerStatus==4){}}
+    <span>保护客户</span>
+    {{#} else {}}
+    <span></span>
     {{#}}}
 </script>
 
@@ -94,16 +102,14 @@
     layui.use(['upload', 'table', 'laypage'], function () {
         var cols = [[
             {field: 'checkBox', checkbox: true, fixed: true}
-            , {field: 'name', title: '客户名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-            , {field: 'number', title: '客户编号', sort: true}
-            , {field: 'phone', title: '联系电话'}
-            , {field: 'corpTel', title: '公司电话'}
-            , {field: 'mail', title: '邮箱'}
-            , {field: 'address', title: '通讯地址'}
-            , {field: 'type', title: '客户类型', templet:'#type'}
-            , {field: 'corpGrade', title: '客户级别'}
+            , {field: 'corpName', title: '企业名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            , {field: 'legalPerson', title: '法人'}
+            , {field: 'corpTel', title: '联系电话'}
+            , {field: 'address', title: '地址'}
+            , {field: 'webUrl', title: '网址'}
+            , {field: 'customerStatus', title: '客户状态', templet:'#customerStatus'}
             , {field: 'visitDate', title: '回访日期'}
-            , {field: 'linkman', title: '联系人'}
+            , {field: 'remarks', title: '备注'}
             , {field: 'op', title: '操作', align: 'center', toolbar: '#toolBars'} //这里的toolbar值是模板元素的选择器
         ]];
         var table = layui.table, $ = layui.jquery, upload = layui.upload, laypage = layui.laypage;
@@ -151,7 +157,7 @@
         });
 
         $("#addBtn").on('click', function () {
-            Common.openFrame('/customer/addcustomer', '添加客户信息', '600px', '500px', function () {
+            Common.openFrame('/customer/addcustomer', '添加客户信息', '650px', '600px', function () {
                 $('#searchBtn').click();
             });
         });

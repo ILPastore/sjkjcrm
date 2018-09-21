@@ -24,75 +24,81 @@ public class CustomerDetail {
     private String customerId;
 
     /**
-     * 客户姓名
+     * 企业名称
      */
-    @Excel(name = "客户姓名", orderNum = "1", width = 20)
-    private String name;
+    @Excel(name = "企业名称", orderNum = "1", width = 20)
+    private String corpName;
 
     /**
-     * 客户编号
+     * 法人
      */
-    @Excel(name = "客户编号", orderNum = "2", width = 20)
-    private String number;
+    @Excel(name = "法人", orderNum = "2", width = 20)
+    private String legalPerson;
 
     /**
-     * 客户类型
+     * 联系电话
      */
-    @Excel(name = "客户类型", orderNum = "3", width = 20)
-    private String type;
-
-    /**
-     * 客户电话
-     */
-    @Excel(name = "客户电话", orderNum = "4", width = 20)
-    private String phone;
-
-    /**
-     * 公司电话
-     */
-    @Excel(name = "公司电话", orderNum = "5", width = 20)
+    @Excel(name = "联系电话", orderNum = "3", width = 20)
     private String corpTel;
 
     /**
-     * 邮箱
+     * 其他联系人
      */
-    @Excel(name = "邮箱", orderNum = "6", width = 20)
-    private String mail;
+    @Excel(name = "其他联系人", orderNum = "4", width = 20)
+    private String otherLinkman;
 
     /**
-     * 通信地址
+     * 其他联系人电话
      */
-    @Excel(name = "通信地址", orderNum = "7", width = 20)
+    @Excel(name = "其他联系人电话", orderNum = "5", width = 20)
+    private String linkmanPhone;
+
+    /**
+     * 地址
+     */
+    @Excel(name = "地址", orderNum = "6", width = 20)
     private String address;
 
     /**
-     * 公司类型
+     * 注册时间
      */
-    @Excel(name = "公司类型", orderNum = "8", width = 20)
-    private String corpType;
+    @Excel(name = "注册时间", orderNum = "7", width = 20)
+    private String registrationTime;
 
     /**
-     * 公司级别
+     * 注册资金
      */
-    @Excel(name = "公司级别", orderNum = "9", width = 20)
-    private String corpGrade;
+    @Excel(name = "注册资金", orderNum = "8", width = 20)
+    private String registrationCapital;
+
+    /**
+     * 网址
+     */
+    @Excel(name = "网址", orderNum = "9", width = 20)
+    private String webUrl;
+
+    /**
+     * 客户状态
+     */
+    @Excel(name = "客户状态", orderNum = "10", width = 20)
+    private String customerStatus;
 
     /**
      * 回访日期
      */
-    @Excel(name = "回访日期", orderNum = "10", width = 20)
+    @Excel(name= "回访日期", orderNum = "11", width = 20)
     private String visitDate;
 
     /**
-     * 联系人
+     * 备注
      */
-    @Excel(name= "联系人", orderNum = "11", width = 20)
-    private String linkman;
+    @Excel(name= "备注", orderNum = "12", width = 20)
+    private String remarks;
 
     /**
-     * 销售员
+     * 登录人
      */
-    private String salesperson;
+    private String loginUser;
 
     /**
      * 创建时间

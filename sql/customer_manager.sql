@@ -15,7 +15,7 @@ create table customer_detail(
     visit_date varchar(10) comment '回访日期',
     linkman varchar(10) comment '联系人',
     salesperson varchar(10) comment '销售员',
-    create_time timestamp default CURRENT_TIMESTAMP commont '创建时间',
+    create_time timestamp default CURRENT_TIMESTAMP comment '创建时间',
     primary key (customer_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户信息详情表';
 
@@ -25,7 +25,7 @@ create table customer_detail(
     corp_name varchar(30) not null comment '企业名称',
     legal_person varchar(30) comment '法人',
     corp_tel varchar(20) comment '联系电话',
-    other_linkman varchar(10) comment '其他联系人',
+    other_linkman varchar(20) comment '其他联系人',
     linkman_phone varchar(20) comment '其他联系人电话',
     address varchar(50) comment '地址',
     registration_time varchar(10) comment '注册时间',
@@ -35,6 +35,6 @@ create table customer_detail(
     visit_date varchar(10) comment '回访日期',
     remarks varchar(100) comment '备注',
     loginuser varchar(10) comment '登录人',
-    create_time timestamp default CURRENT_TIMESTAMP commont '创建时间',
+    create_time timestamp default CURRENT_TIMESTAMP comment '创建时间',
     primary key (customer_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户信息详情表';

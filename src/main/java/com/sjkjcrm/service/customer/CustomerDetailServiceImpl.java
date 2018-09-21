@@ -30,7 +30,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
 
     @Override
     public int insertCustomer(CustomerDetail customerDetail) {
-        customerDetail.setSalesperson(session.getAttribute("user").toString());
+        customerDetail.setLoginUser(session.getAttribute("user").toString());
         return customerDetailDao.insertCustomer(customerDetail);
     }
 
@@ -48,18 +48,19 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
                 @Override
                 public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
                     CustomerDetail customerDetail = customerDetailList.get(i);
-                    preparedStatement.setString(1, customerDetail.getName());
-                    preparedStatement.setString(2, customerDetail.getNumber());
-                    preparedStatement.setString(3, customerDetail.getType());
-                    preparedStatement.setString(4, customerDetail.getPhone());
-                    preparedStatement.setString(5, customerDetail.getCorpTel());
-                    preparedStatement.setString(6, customerDetail.getMail());
-                    preparedStatement.setString(7, customerDetail.getAddress());
-                    preparedStatement.setString(8, customerDetail.getCorpType());
-                    preparedStatement.setString(9, customerDetail.getCorpGrade());
-                    preparedStatement.setString(10, customerDetail.getVisitDate());
-                    preparedStatement.setString(11, customerDetail.getLinkman());
-                    preparedStatement.setString(12, session.getAttribute("user").toString());
+                    preparedStatement.setString(1, customerDetail.getCorpName());
+                    preparedStatement.setString(2, customerDetail.getLegalPerson());
+                    preparedStatement.setString(3, customerDetail.getCorpTel());
+                    preparedStatement.setString(4, customerDetail.getOtherLinkman());
+                    preparedStatement.setString(5, customerDetail.getLinkmanPhone());
+                    preparedStatement.setString(6, customerDetail.getAddress());
+                    preparedStatement.setString(7, customerDetail.getRegistrationTime());
+                    preparedStatement.setString(8, customerDetail.getRegistrationCapital());
+                    preparedStatement.setString(9, customerDetail.getWebUrl());
+                    preparedStatement.setString(10, customerDetail.getCustomerStatus());
+                    preparedStatement.setString(11, customerDetail.getVisitDate());
+                    preparedStatement.setString(12, customerDetail.getRemarks());
+                    preparedStatement.setString(13, session.getAttribute("user").toString());
                 }
 
                 @Override

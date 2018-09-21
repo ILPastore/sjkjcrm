@@ -7,6 +7,7 @@ import com.sjkjcrm.util.controller.BaseController;
 import com.sjkjcrm.util.excel.ExcelUtils;
 import com.sjkjcrm.util.layui.ResultModel;
 import com.sjkjcrm.util.layui.ResultStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import java.util.Objects;
  */
 @Controller
 @RequestMapping("/customer")
+@Slf4j
 public class CustomerController extends BaseController {
 
     @Autowired
@@ -33,31 +35,6 @@ public class CustomerController extends BaseController {
         List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
 //        return super.getLayPage4List(new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailList));
         return new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailList.size() + "", customerDetailList);
-    }
-
-    @RequestMapping("/homepage")
-    public String homepage() {
-        return "customer/home";
-    }
-
-    @RequestMapping("/customerpage")
-    public String customerPage() {
-        return "customer/list";
-    }
-
-    @RequestMapping("/customerpage1")
-    public String customerPage1() {
-        return "permission/list";
-    }
-
-    @RequestMapping("/welcome")
-    public String welcome() {
-        return "welcome";
-    }
-
-    @GetMapping("/addcustomer")
-    public String addCustomer() {
-        return "customer/edit";
     }
 
     /**
@@ -120,6 +97,22 @@ public class CustomerController extends BaseController {
         List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
         if (customerDetailList.isEmpty()) {
             return;
+        } else {
+            for (CustomerDetail customerDetail : customerDetailList) {
+                if ("0".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("意向客户");
+                } else if ("1".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("重点客户");
+                } else if ("2".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("公海客户");
+                } else if ("3".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("合作客户");
+                } else if ("4".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("保护客户");
+                } else {
+                    customerDetail.setCustomerStatus("");
+                }
+            }
         }
 
         // 导出操作

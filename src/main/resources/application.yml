@@ -11,6 +11,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+#    database-platform: org.hibernate.dialect.MySQL5DialectUTF8
   http:
     encoding:
       charset: utf-8

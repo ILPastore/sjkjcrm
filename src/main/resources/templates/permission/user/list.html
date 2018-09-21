@@ -22,9 +22,9 @@
 <table class="layui-hide" id="userTable" lay-filter="userFilter"></table>
 <script th:src="@{/js/layui/layui.all.js}"></script>
 <script type="text/html" id="toolBars">
-    <button shiro:hasPermission="sys:user:edit" class="layui-btn layui-btn-sm" lay-event="edit" th:title="修改">
+    <!--<button shiro:hasPermission="sys:user:edit" class="layui-btn layui-btn-sm" lay-event="edit" th:title="修改">
         <i class="layui-icon">&#xe642;</i>
-    </button>
+    </button>-->
     <button class="layui-btn layui-btn-sm" lay-event="del" th:title="删除">
         <i class="layui-icon">&#xe640;</i>
     </button>

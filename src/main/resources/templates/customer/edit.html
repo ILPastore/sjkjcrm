@@ -11,79 +11,92 @@
 <body class="form-body">
 <form class="layui-form ">
     <div class="layui-form-item layui-col-md6 layui-col-md-offset2">
-        <label class="layui-form-label">客户名称</label>
+        <label class="layui-form-label">企业名称</label>
         <div class="layui-input-inline form-length350">
-            <input type="text" name="name" lay-verify="required"
-                   placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+            <input type="text" name="corpName" lay-verify="required"
+                   placeholder="请输入企业名称" autocomplete="off" class="layui-input">
         </div>
-        <div class="layui-form-mid layui-word-aux">*6-12个字符</div>
+        <!--<div class="layui-form-mid layui-word-aux">*6-12个字符</div>-->
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
-        <label class="layui-form-label">客户编号</label>
+        <label class="layui-form-label">法人</label>
         <div class="layui-input-inline">
-            <input type="text" name="number" lay-verify="required|number" lay-verType="tips"
-                   placeholder="请输入客户编号" autocomplete="off" class="layui-input">
+            <input type="text" name="legalPerson" lay-verify="required" lay-verType="tips"
+                   placeholder="请输入法人" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">联系电话</label>
         <div class="layui-input-inline">
-            <input type="text" name="phone" lay-verify="required|phone" placeholder="请输入联系电话"
+            <input type="text" name="corpTel" lay-verify="required" placeholder="请输入联系电话"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
-        <label class="layui-form-label">公司电话</label>
+        <label class="layui-form-label">其他联系人</label>
         <div class="layui-input-inline">
-            <input type="text" name="corpTel" lay-verify="required|number" placeholder="请输入公司电话"
+            <input type="text" name="otherLinkman" placeholder="请输入其他联系人"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
-        <label class="layui-form-label">邮箱</label>
+        <label class="layui-form-label">其他联系人电话</label>
         <div class="layui-input-inline">
-            <input type="text" name="mail" lay-verify="required" placeholder="请输入邮箱"
+            <input type="text" name="linkmanPhone" placeholder="请输入其他联系人电话"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
-        <label class="layui-form-label">通讯地址</label>
+        <label class="layui-form-label">地址</label>
         <div class="layui-input-inline">
-            <input type="text" name="address" lay-verify="required" placeholder="请输入通讯地址"
+            <input type="text" name="address" placeholder="请输入地址"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
-        <label class="layui-form-label">客户类型</label>
+        <label class="layui-form-label">注册时间</label>
         <div class="layui-input-inline">
-            <select name="type" lay-verify="required">
+            <input type="text" name="registrationTime" placeholder="请输入注册时间"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
+        <label class="layui-form-label">注册资金</label>
+        <div class="layui-input-inline">
+            <input type="text" name="registrationCapital" placeholder="请输入注册资金"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
+        <label class="layui-form-label">网址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="webUrl" placeholder="请输入网址"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
+        <label class="layui-form-label">客户状态</label>
+        <div class="layui-input-inline">
+            <select name="customerStatus">
                 <option value="">请选择</option>
                 <option value="0">意向客户</option>
-                <option value="1">签单客户</option>
+                <option value="1">重点客户</option>
                 <option value="2">公海客户</option>
+                <option value="3">合作客户</option>
+                <option value="4">保护客户</option>
             </select>
         </div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
-        <label class="layui-form-label">客户级别</label>
-        <div class="layui-input-inline">
-            <input type="text" name="corpGrade" lay-verify="required" placeholder="请输入客户级别"
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
-        <label class="layui-form-label">联系人</label>
-        <div class="layui-input-inline">
-            <input type="text" name="linkman" lay-verify="required" placeholder="请输入联系人"
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">回访日期</label>
-        <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+        <div class="layui-inline">
             <input type="text" class="layui-input" name="visitDate" id="visitDate">
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-inline">
+            <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
         </div>
     </div>
 
