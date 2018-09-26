@@ -46,4 +46,10 @@ public interface CustomerDetailService {
      * @param customerDetail
      */
     void updateCustomer(CustomerDetail customerDetail);
+
+    /**
+     * 获取总记录数
+     * @return
+     */
+    String getDataCount();
 }

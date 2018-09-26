@@ -7,12 +7,9 @@ var Common = function () {
             , cellMinWidth: 80 // 全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: cols
             , page:true,
-            // , page: {
-            //     limits: [10, 20, 50, 100]
-            // },
             request: {
-                pageName: 'page',
-                limitName: 'limit'
+                pageName: 'current',
+                limitName: 'size'
             },
             done: function (res, curr, count) {
                 console.log(res);
@@ -40,16 +37,15 @@ var Common = function () {
 
     var searchTable = function (formId, tableIns, isPage) {
         var queryParams = getParams(formId);
-        var page;
-        if (isPage === false) {
-            page = isPage
-        } else {
-            page = {curr: 1}
+        var request;
+
+        request = {
+            pageName: 'current',
+            limitName: 'size'
         }
-        console.log(page);
         tableIns.reload({
             where: {condition: queryParams},
-            page: page
+            request: request
         });
     };
 
@@ -183,6 +179,7 @@ var Common = function () {
             return initSimpleTable(ele, url, cols, table, doneCallBack);
         },
         searchTable: function (formId, table, isPage) {
+            console.log(isPage);
             searchTable(formId, table, isPage);
         },
         uploadFile: function (eleId, layUpload, done, extendParam, error, accept, exts) {

@@ -16,7 +16,7 @@
             <input type="text" name="corpName" lay-verify="required"
                    placeholder="请输入企业名称" autocomplete="off" class="layui-input">
         </div>
-        <!--<div class="layui-form-mid layui-word-aux">*6-12个字符</div>-->
+        <div class="layui-form-mid layui-word-aux"><font color="red" size="5">*</font></div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">法人</label>
@@ -24,6 +24,7 @@
             <input type="text" name="legalPerson" lay-verify="required" lay-verType="tips"
                    placeholder="请输入法人" autocomplete="off" class="layui-input">
         </div>
+        <div class="layui-form-mid layui-word-aux"><font color="red" size="5">*</font></div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">联系电话</label>
@@ -31,6 +32,7 @@
             <input type="text" name="corpTel" lay-verify="required" placeholder="请输入联系电话"
                    autocomplete="off" class="layui-input">
         </div>
+        <div class="layui-form-mid layui-word-aux"><font color="red" size="5">*</font></div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">其他联系人</label>
@@ -49,9 +51,10 @@
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">地址</label>
         <div class="layui-input-inline">
-            <input type="text" name="address" placeholder="请输入地址"
+            <input type="text" name="address" lay-verify="required" placeholder="请输入地址"
                    autocomplete="off" class="layui-input">
         </div>
+        <div class="layui-form-mid layui-word-aux"><font color="red" size="5">*</font></div>
     </div>
     <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
         <label class="layui-form-label">注册时间</label>

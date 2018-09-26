@@ -32,7 +32,7 @@ create table customer_detail(
     registration_capital varchar(10) comment '注册资金',
     weburl varchar(30) comment '网址',
     customer_status varchar(5) comment '客户状态',
-    visit_date varchar(10) comment '回访日期',
+    visit_date varchar(20) comment '回访日期',
     remarks varchar(100) comment '备注',
     loginuser varchar(10) comment '登录人',
     create_time timestamp default CURRENT_TIMESTAMP comment '创建时间',

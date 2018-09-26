@@ -57,9 +57,17 @@ public class CustomerDetailDao {
         }
 
         if (session.getAttribute("user") != null) {
-            sql.append("and loginuser = ?");
+            sql.append("and loginuser = ? ");
             conditionValues.add(session.getAttribute("user"));
         }
+
+        // 按照时间倒序
+        sql.append("order by create_time desc ");
+
+        // 分页语句
+        sql.append("limit ?, ?");
+        conditionValues.add((page.getCurrent() - 1)*page.getSize());
+        conditionValues.add(page.getSize());
 
         return baseDao.queryList(sql.toString(), conditionValues.toArray(), CustomerDetail.class);
     }
@@ -105,5 +113,15 @@ public class CustomerDetailDao {
     public void updateCustomer(CustomerDetail customerDetail) {
         String sql = "update customer_detail set corp_name = ?, legal_person = ?, corp_tel = ?, other_linkman = ?, linkman_phone = ?, address = ?, registration_time = ?, registration_capital = ?, weburl = ?, customer_status = ?, visit_date = ?, remarks = ? where customer_id = ?";
         baseDao.update(sql, new Object[] {customerDetail.getCorpName(), customerDetail.getLegalPerson(), customerDetail.getCorpTel(), customerDetail.getOtherLinkman(), customerDetail.getLinkmanPhone(), customerDetail.getAddress(), customerDetail.getRegistrationTime(), customerDetail.getRegistrationCapital(), customerDetail.getWebUrl(), customerDetail.getCustomerStatus(), customerDetail.getVisitDate(), customerDetail.getRemarks(), customerDetail.getCustomerId()});
+    }
+
+    /**
+     * 获取总记录数量
+     * @return
+     */
+    public String getDataCount() {
+        String sql = "select count(*) as count from customer_detail";
+        Map<String, Object> resultMap = baseDao.queryForMap(sql);
+        return resultMap.get("count").toString();
     }
 }

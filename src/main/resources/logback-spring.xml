@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <appender name="sql" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/${myAppName}-sql.log</File>
+        <encoder>
+            <pattern>%d [%level] [%thread] %logger{15}:%line %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${myAppName}-sql.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="sql-queue" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize>
+        <appender-ref ref="sql"/>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>Debug</level>
+        </filter>
+        <encoder>
+            <Pattern>${CONSOLE_LOG_PATTERN}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--<category name="org.springframework.jdbc.core.JdbcTemplate">
+        <priority value="debug" />
+    </category>-->
+
+    <!--显示日志-->
+    <logger name="org.springframework.jdbc.core" additivity="false" level="Trace" >
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="sql-queue"/>
+    </logger>
+</configuration>

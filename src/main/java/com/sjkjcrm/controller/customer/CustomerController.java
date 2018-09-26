@@ -20,6 +20,7 @@ import java.util.Objects;
 
 /**
  * 客户管理模块controller
+ * @author nb2018
  */
 @Controller
 @RequestMapping("/customer")
@@ -33,19 +34,17 @@ public class CustomerController extends BaseController {
     @ResponseBody
     public ResultModel<List<CustomerDetail>> queryCustomerListByCondition(Page<CustomerDetail> page) {
         List<CustomerDetail> customerDetailList = customerDetailService.getCustomerByCondition(page);
-//        return super.getLayPage4List(new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailList));
-        return new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailList.size() + "", customerDetailList);
+        return new ResultModel<>(ResultStatus.SUCCESS.getCode(), ResultStatus.SUCCESS.getMsg(), customerDetailService.getDataCount(), customerDetailList);
     }
 
     /**
-     * 修改客户信息·
+     * 修改客户信息
      * @param id
      * @param model
      * @return
      */
     @GetMapping("/editCustomer")
     public String editCustomer(@RequestParam(name = "id", required = false) String id, Model model) {
-        System.out.println("id=====" + id);
         CustomerDetail customerDetail = customerDetailService.selectCustomerDetailById(id);
         model.addAttribute("customerDetail", customerDetail);
         return "customer/update";

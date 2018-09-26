@@ -43,7 +43,23 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     public void importExcel(String fileName, MultipartFile file) {
         try {
             List<CustomerDetail> customerDetailList = ExcelUtils.importExcel(file, 1, 1, CustomerDetail.class);
-            System.out.println("导入数据一共【" + customerDetailList.size() + "】行");
+
+            for (CustomerDetail customerDetail : customerDetailList) {
+                if ("意向客户".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("0");
+                } else if ("重点客户".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("1");
+                } else if ("公海客户".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("2");
+                } else if ("合作客户".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("3");
+                } else if ("保护客户".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("4");
+                } else {
+                    customerDetail.setCustomerStatus("");
+                }
+            }
+
             BatchPreparedStatementSetter batchPreparedStatementSetter = new BatchPreparedStatementSetter() {
                 @Override
                 public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
@@ -82,5 +98,10 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     @Override
     public void updateCustomer(CustomerDetail customerDetail) {
         customerDetailDao.updateCustomer(customerDetail);
+    }
+
+    @Override
+    public String getDataCount() {
+        return customerDetailDao.getDataCount();
     }
 }
