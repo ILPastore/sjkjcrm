@@ -55,8 +55,6 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
                     customerDetail.setCustomerStatus("3");
                 } else if ("保护客户".equals(customerDetail.getCustomerStatus())) {
                     customerDetail.setCustomerStatus("4");
-                } else {
-                    customerDetail.setCustomerStatus("");
                 }
             }
 
