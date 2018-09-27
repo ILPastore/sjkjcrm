@@ -92,7 +92,8 @@
 }
 /*///*/
 .mb2{
-	margin-bottom: 20px
+	margin-bottom: 20px;
+	cursor:pointer
 }
 .mb2 a{
 	text-decoration: none;
