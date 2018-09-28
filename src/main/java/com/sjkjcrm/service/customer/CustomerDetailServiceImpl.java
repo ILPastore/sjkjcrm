@@ -46,15 +46,15 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
 
             for (CustomerDetail customerDetail : customerDetailList) {
                 if ("意向客户".equals(customerDetail.getCustomerStatus())) {
-                    customerDetail.setCustomerStatus("0");
-                } else if ("重点客户".equals(customerDetail.getCustomerStatus())) {
                     customerDetail.setCustomerStatus("1");
-                } else if ("公海客户".equals(customerDetail.getCustomerStatus())) {
+                } else if ("重点客户".equals(customerDetail.getCustomerStatus())) {
                     customerDetail.setCustomerStatus("2");
-                } else if ("合作客户".equals(customerDetail.getCustomerStatus())) {
+                } else if ("公海客户".equals(customerDetail.getCustomerStatus())) {
                     customerDetail.setCustomerStatus("3");
-                } else if ("保护客户".equals(customerDetail.getCustomerStatus())) {
+                } else if ("合作客户".equals(customerDetail.getCustomerStatus())) {
                     customerDetail.setCustomerStatus("4");
+                } else if ("保护客户".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("5");
                 }
             }
 

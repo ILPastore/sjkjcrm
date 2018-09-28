@@ -98,15 +98,15 @@ public class CustomerController extends BaseController {
             return;
         } else {
             for (CustomerDetail customerDetail : customerDetailList) {
-                if ("0".equals(customerDetail.getCustomerStatus())) {
+                if ("1".equals(customerDetail.getCustomerStatus())) {
                     customerDetail.setCustomerStatus("意向客户");
-                } else if ("1".equals(customerDetail.getCustomerStatus())) {
-                    customerDetail.setCustomerStatus("重点客户");
                 } else if ("2".equals(customerDetail.getCustomerStatus())) {
-                    customerDetail.setCustomerStatus("公海客户");
+                    customerDetail.setCustomerStatus("重点客户");
                 } else if ("3".equals(customerDetail.getCustomerStatus())) {
-                    customerDetail.setCustomerStatus("合作客户");
+                    customerDetail.setCustomerStatus("公海客户");
                 } else if ("4".equals(customerDetail.getCustomerStatus())) {
+                    customerDetail.setCustomerStatus("合作客户");
+                } else if ("5".equals(customerDetail.getCustomerStatus())) {
                     customerDetail.setCustomerStatus("保护客户");
                 } else {
                     customerDetail.setCustomerStatus("");
