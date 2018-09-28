@@ -43,11 +43,11 @@ public class MyShiroRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         for (Role role:roles) {
             //添加角色
-            simpleAuthorizationInfo.addRole(role.getRoleName());
+            simpleAuthorizationInfo.addRole(role.getRoleCode());
         }
         for(Permission permission:permissions){
             //添加权限
-            simpleAuthorizationInfo.addStringPermission(permission.getPermission());
+            simpleAuthorizationInfo.addStringPermission(permission.getPermissionCode());
         }
         return simpleAuthorizationInfo;
     }
