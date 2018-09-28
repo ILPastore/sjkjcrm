@@ -7,6 +7,7 @@ import com.sjkjcrm.bean.permisson.Role;
 import com.sjkjcrm.bean.permisson.User;
 import com.sjkjcrm.repository.RoleRepository;
 import com.sjkjcrm.repository.UserRepository;
+import com.sjkjcrm.repository.UserRoleRepository;
 import com.sjkjcrm.service.ILoginService;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class LoginServiceImpl implements ILoginService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
 
     //添加用户
     @Override
@@ -72,7 +76,7 @@ public class LoginServiceImpl implements ILoginService {
 
     @Override
     public List<Role> findRolesByUserCode(String userCode) {
-        return null;
+        return roleRepository.findRoleByUserCode(userCode);
     }
 
     @Override
