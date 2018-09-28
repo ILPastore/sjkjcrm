@@ -33,8 +33,8 @@
     layui.use(['upload', 'table', 'laypage'], function () {
         var cols = [[
             {field: 'checkBox', checkbox: true, fixed: true}
-            , {field: 'roleName', title: '角色名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-            , {field: 'roleCode', title: '角色编号', sort: true}
+            , {field: 'roleName', title: '权限名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            , {field: 'roleCode', title: '权限编号', sort: true}
             , {field: 'op', title: '操作', align: 'center', toolbar: '#toolBars'} //这里的toolbar值是模板元素的选择器
         ]];
         var table = layui.table, $ = layui.jquery, upload = layui.upload, laypage = layui.laypage;
@@ -53,17 +53,17 @@
                     });
                 });
             } else if (layEvent === 'edit') { // 编辑
-                Common.openFrame('/role/edit?id=' + data.customerId, '修改用户信息', '800px', '500px', function () {
+                Common.openFrame('/role/edit?id=' + data.customerId, '修改权限信息', '800px', '500px', function () {
                     $('#searchBtn').click();
                 });
             }
         });
 
-        var initTable = Common.initTable('#userTable', '/role/list', cols, table);
+        var initTable = Common.initTable('#userTable', '/permission/list', cols, table);
 
 
         $("#addBtn").on('click', function () {
-            Common.openFrame('/role/edit.html', '添加用户信息', '600px', '500px', function () {
+            Common.openFrame('/role/edit.html', '添加权限信息', '600px', '500px', function () {
                 $('#searchBtn').click();
             });
         });

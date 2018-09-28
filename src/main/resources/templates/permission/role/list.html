@@ -53,7 +53,7 @@
                     });
                 });
             } else if (layEvent === 'edit') { // 编辑
-                Common.openFrame('/role/edit?id=' + data.customerId, '修改用户信息', '800px', '500px', function () {
+                Common.openFrame('/role/edit?id=' + data.customerId, '修改角色信息', '800px', '500px', function () {
                     $('#searchBtn').click();
                 });
             }
@@ -63,7 +63,7 @@
 
 
         $("#addBtn").on('click', function () {
-            Common.openFrame('/role/edit.html', '添加用户信息', '600px', '500px', function () {
+            Common.openFrame('/role/edit.html', '添加角色信息', '600px', '500px', function () {
                 $('#searchBtn').click();
             });
         });
