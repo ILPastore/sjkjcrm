@@ -83,18 +83,16 @@
     </button>
 </script>
 <script type="text/html" id="customerStatus">
-    {{#if(d.customerStatus==0){}}
+    {{#if(d.customerStatus==1){}}
     <span>意向客户</span>
-    {{#} else if(d.customerStatus==1){}}
-    <span>重点客户</span>
     {{#} else if(d.customerStatus==2){}}
-    <span>公海客户</span>
+    <span>重点客户</span>
     {{#} else if(d.customerStatus==3){}}
-    <span>合作客户</span>
+    <span>公海客户</span>
     {{#} else if(d.customerStatus==4){}}
+    <span>合作客户</span>
+    {{#} else if(d.customerStatus==5){}}
     <span>保护客户</span>
-    {{#} else if(d.customerStatus == null || d.customerStatus == ''){}}
-    <span></span>
     {{#} else {}}
     <span>{{d.customerStatus}}</span>
     {{#}}}

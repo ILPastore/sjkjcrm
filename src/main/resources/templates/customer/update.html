@@ -144,7 +144,9 @@
         });
 
         // 控制下拉框的值
-        $("#customerStatus option[value=" + [[${customerDetail.customerStatus}]] + "]").prop("selected", true);
+        if (Object.keys([[${customerDetail.customerStatus}]]).length != 0) {
+            $("#customerStatus option[value=" + [[${customerDetail.customerStatus}]] + "]").prop("selected", true);
+        }
 
         form.render();
     });

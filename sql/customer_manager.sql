@@ -31,7 +31,7 @@ create table customer_detail(
     registration_time varchar(10) comment '注册时间',
     registration_capital varchar(10) comment '注册资金',
     weburl varchar(30) comment '网址',
-    customer_status varchar(5) comment '客户状态',
+    customer_status varchar(5) comment '客户状态: 1-意向客户 2-重点客户 3-公海客户 4-合作客户 5-保护客户',
     visit_date varchar(20) comment '回访日期',
     remarks varchar(100) comment '备注',
     loginuser varchar(10) comment '登录人',
