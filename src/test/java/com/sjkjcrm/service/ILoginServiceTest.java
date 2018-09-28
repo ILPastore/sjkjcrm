@@ -1,5 +1,6 @@
 package com.sjkjcrm.service;
 
+import com.sjkjcrm.bean.permisson.Permission;
 import com.sjkjcrm.bean.permisson.Role;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,5 +47,6 @@ public class ILoginServiceTest {
 
     @Test
     public void findPermissionsByUserCode() {
+        List<Permission> permissions = iLoginService.findPermissionsByUserCode("admin");
     }
 }

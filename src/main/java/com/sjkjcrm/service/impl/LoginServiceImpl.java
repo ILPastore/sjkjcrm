@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.sjkjcrm.bean.permisson.Permission;
 import com.sjkjcrm.bean.permisson.Role;
 import com.sjkjcrm.bean.permisson.User;
+import com.sjkjcrm.repository.PermissionRepository;
 import com.sjkjcrm.repository.RoleRepository;
 import com.sjkjcrm.repository.UserRepository;
 import com.sjkjcrm.repository.UserRoleRepository;
@@ -32,6 +33,9 @@ public class LoginServiceImpl implements ILoginService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private PermissionRepository permissionRepository;
 
     @Autowired
     private UserRoleRepository userRoleRepository;
@@ -81,6 +85,6 @@ public class LoginServiceImpl implements ILoginService {
 
     @Override
     public List<Permission> findPermissionsByUserCode(String userCode) {
-        return null;
+        return permissionRepository.findPermissionsByUserCode(userCode);
     }
 }
