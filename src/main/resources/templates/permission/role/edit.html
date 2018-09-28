@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Title</title>
+    <div th:replace="common/links::header"></div>
+    <div th:replace="common/script::js_footer"></div>
+    <script th:src="@{/js/common/verify.js}"></script>
+    <script type="text/javascript" src="/js/layui/lay/modules/laydate.js"></script>
+</head>
+<body class="form-body">
+<form class="layui-form ">
+    <div class="layui-form-item layui-col-md6 layui-col-md-offset2">
+        <label class="layui-form-label">角色名称</label>
+        <div class="layui-input-inline form-length350">
+            <input type="text" name="roleName" lay-verify="required"
+                   placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*6-12个字符</div>
+    </div>
+    <div class="layui-form-item layui-col-md4 layui-col-md-offset2">
+        <label class="layui-form-label">角色编号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="roleCode"  lay-verType="tips"
+                   placeholder="请输入角色编号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-col-md-offset5">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="add" type="button">立即提交</button>
+            <button id="closeBtn" type="button" class="layui-btn layui-btn-primary">取消</button>
+        </div>
+    </div>
+</form>
+<!--<script type="text/javascript" src="/js/layui/layui.all.js"></script>-->
+<script th:inline="javascript">
+    layui.use('form', function () {
+        var form = layui.form, $ = layui.jquery;
+
+        // 监听提交
+        form.on('submit(add)', function (data) {
+            Common.ajaxFormSubmit('/role/add', data.field, function (data) {
+                layer.msg(data.msg, {icon: 6}, function () {
+                    Common.closeFrame();
+                });
+            });
+            return false;
+        });
+
+        $("#closeBtn").on('click', function () {
+            Common.closeFrame();
+        });
+
+        // 初始化日期组件
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#visitDate'
+        });
+
+        form.render();
+    });
+</script>
+</body>
+</html>

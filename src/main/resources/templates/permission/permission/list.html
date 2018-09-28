@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head>
+    <title>角色管理</title>
+    <div th:replace="common/links::header"></div>
+    <div th:replace="common/script::js_footer"></div>
+</head>
+<body>
+<fieldset class="layui-elem-field">
+    <form class="layui-form" style="text-align: left" id="searchForm">
+
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-primary"
+                        id="addBtn"><i class="layui-icon">&#xe654;</i>新增
+                </button>
+            </div>
+
+    </form>
+</fieldset>
+<hr class="layui-bg-green">
+<table class="layui-hide" id="userTable" lay-filter="userFilter"></table>
+<script th:src="@{/js/layui/layui.all.js}"></script>
+<script type="text/html" id="toolBars">
+    <button shiro:hasPermission="sys:user:edit" class="layui-btn layui-btn-sm" lay-event="edit" th:title="修改">
+        <i class="layui-icon">&#xe642;</i>
+    </button>
+    <button class="layui-btn layui-btn-sm" lay-event="del" th:title="删除">
+        <i class="layui-icon">&#xe640;</i>
+    </button>
+</script>
+<script th:inline="javascript">
+    layui.use(['upload', 'table', 'laypage'], function () {
+        var cols = [[
+            {field: 'checkBox', checkbox: true, fixed: true}
+            , {field: 'roleName', title: '角色名称'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            , {field: 'roleCode', title: '角色编号', sort: true}
+            , {field: 'op', title: '操作', align: 'center', toolbar: '#toolBars'} //这里的toolbar值是模板元素的选择器
+        ]];
+        var table = layui.table, $ = layui.jquery, upload = layui.upload, laypage = layui.laypage;
+        table.on('tool(userFilter)', function (obj) {
+            var data = obj.data; // 获得当前行数据
+            var layEvent = obj.event; // 获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if (layEvent === 'detail') { // 查看
+                Common.openFrame('/sys/role/detail?id=' + data.id, '角色信息', '800px', '500px');
+            } else if (layEvent === 'del') { // 删除
+                layer.confirm('真的删除行么', function (index) {
+                    Common.ajaxFormSubmit('/role/delete', {id: data.customerId}, function (data) {
+                        layer.close(index);
+                        layer.msg(data.msg, {icon: 6}, function () {
+                            $('#searchBtn').click();
+                        });
+                    });
+                });
+            } else if (layEvent === 'edit') { // 编辑
+                Common.openFrame('/role/edit?id=' + data.customerId, '修改用户信息', '800px', '500px', function () {
+                    $('#searchBtn').click();
+                });
+            }
+        });
+
+        var initTable = Common.initTable('#userTable', '/role/list', cols, table);
+
+
+        $("#addBtn").on('click', function () {
+            Common.openFrame('/role/edit.html', '添加用户信息', '600px', '500px', function () {
+                $('#searchBtn').click();
+            });
+        });
+
+
+    });
+
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+    });
+</script>
+</body>
+</html>
